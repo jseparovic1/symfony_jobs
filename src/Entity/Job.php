@@ -29,6 +29,9 @@ class Job implements ResourceInterface
     /** @var string */
     private $slug;
 
+    /** @var Company */
+    private $company;
+
     /**
      * @return mixed
      */
@@ -131,5 +134,21 @@ class Job implements ResourceInterface
     public function setSlug(string $slug): void
     {
         $this->slug = $slug;
+    }
+
+    /**
+     * @return Company
+     */
+    public function getCompany(): Company
+    {
+        return $this->company;
+    }
+
+    /**
+     * @param Company $company
+     */
+    public function setCompany(Company $company): void
+    {
+        $this->company = $company;
     }
 }
