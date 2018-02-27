@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Entity\Job" table="symfonyjobs_job" repository-class="App\Repository\JobRepository">
+        <id name="id" type="bigint" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+        <field name="description" type="text"/>
+        <field name="website" nullable="true"/>
+        <field name="location"/>
+        <field name="remote" type="boolean"/>
+        <field name="title"/>
+        <field name="slug" length="156" unique="true">
+            <gedmo:slug unique="true" style="camel" updatable="false" separator="_" fields="title,location" />
+        </field>
+        <field name="createdAt" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+        <field name="updatedAt" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+    </entity>
+</doctrine-mapping>
