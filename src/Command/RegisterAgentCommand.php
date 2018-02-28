@@ -12,10 +12,14 @@ class RegisterAgentCommand
     /** @var string */
     private $password;
 
+    /** @var string */
+    private $passwordConfirm;
+
     public function __construct(Request $request)
     {
         $this->email = $request->request->get('email');
         $this->password = $request->request->get('password');
+        $this->passwordConfirm = $request->request->get('passwordConfirm');
     }
 
     public function getEmail(): string
