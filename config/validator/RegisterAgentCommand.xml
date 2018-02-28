@@ -5,6 +5,11 @@
         http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
     <class name="App\Command\RegisterAgentCommand">
+        <constraint name="App\Validator\Constraint\PasswordConfirmation">
+            <option name="message">Password does not match the confirm password.</option>
+            <option name="field">password</option>
+            <option name="confirmField">passwordConfirm</option>
+        </constraint>
         <property name="email">
             <constraint name="NotBlank" />
             <constraint name="Email" />
