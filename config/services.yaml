@@ -17,11 +17,16 @@ services:
 
     App\:
         resource: '../src/*'
-        exclude: '../src/{Entity,Migrations,Tests,Kernel.php}'
+        exclude: '../src/{Entity,Migrations,Tests,Kernel.php,Handler}'
 
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
+    App\Handler\:
+        resource: '../src/Handler'
+        tags:
+            - {name : 'tactician.handler', typehints: true}
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

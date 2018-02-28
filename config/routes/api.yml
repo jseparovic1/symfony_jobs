@@ -2,6 +2,12 @@ index:
     path: /
     controller: App\Controller\HomeController::index
 
+#   Auth
+action.register:
+    path: /register
+    methods: [POST]
+    controller: App\Controller\Auth\RegisterAgentAction
+
 action.show_jobs:
     path: /jobs
     controller: App\Controller\Job\ShowJobsAction
