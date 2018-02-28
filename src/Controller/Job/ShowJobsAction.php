@@ -3,27 +3,13 @@
 namespace App\Controller\Job;
 
 use App\Controller\BaseAction;
+use App\Repository\CompanyRepository;
 use App\Repository\JobRepository;
 
 class ShowJobsAction extends BaseAction
 {
-    public function __invoke()
+    public function __invoke(CompanyRepository $companyRepository)
     {
-        $data = [
-            "jobs1" => [
-                'madarska' => 'penis'
-            ],
-            "jobs3" => [
-                'madarska' => 'penis'
-            ],
-            "jobs4" => [
-                'madarska' => 'penis'
-            ],
-            "jobs5" => [
-                'madarska' => 'penis'
-            ],
-        ];
-
-        return $this->createView($data);
+        return $this->createView(['data' => $companyRepository->findAll()]);
     }
 }
