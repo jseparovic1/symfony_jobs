@@ -26,7 +26,7 @@ class Company implements ResourceInterface
     /** @var string */
     private $contactEmail;
 
-    /** @var Agent */
+    /** @var User */
     private $agent;
 
     /**
@@ -88,7 +88,7 @@ class Company implements ResourceInterface
     /**
      * @return string
      */
-    public function getContactEmail(): string
+    public function getContactEmail(): ?string
     {
         return $this->contactEmail;
     }
@@ -96,23 +96,23 @@ class Company implements ResourceInterface
     /**
      * @param string $email
      */
-    public function setContactEmail(string $email): void
+    public function setContactEmail(?string $email): void
     {
         $this->contactEmail = $email;
     }
 
     /**
-     * @return Agent
+     * @return User
      */
-    public function getAgent(): Agent
+    public function getAgent(): ?User
     {
         return $this->agent;
     }
 
     /**
-     * @param Agent $agent
+     * @param User $agent
      */
-    public function setAgent(Agent $agent): void
+    public function setAgent(User $agent): void
     {
         $this->agent = $agent;
     }

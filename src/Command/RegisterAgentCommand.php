@@ -31,4 +31,9 @@ class RegisterAgentCommand
     {
         return $this->password;
     }
+
+    public function getPasswordConfirm(): string
+    {
+        return $this->passwordConfirm;
+    }
 }

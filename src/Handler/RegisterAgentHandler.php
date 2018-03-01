@@ -21,10 +21,7 @@ class RegisterAgentHandler
 
     public function handle(RegisterAgentCommand $registerAgentCommand)
     {
-        $userId = Uuid::uuid4();
-
         $this->bus->handle(new CreateUserCommand(
-            $userId,
             $registerAgentCommand->getEmail(),
             $registerAgentCommand->getPassword()
         ));

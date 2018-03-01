@@ -2,7 +2,6 @@
 
 namespace App\Controller\Auth;
 
-
 use App\Command\RegisterAgentCommand;
 use App\Controller\BaseAction;
 use Symfony\Component\HttpFoundation\Request;

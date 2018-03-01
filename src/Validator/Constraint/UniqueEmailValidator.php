@@ -2,8 +2,8 @@
 
 namespace App\Validator\Constraint;
 
+use App\Entity\User;
 use App\Repository\UserRepository;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -19,9 +19,14 @@ class UniqueEmailValidator extends ConstraintValidator
         $this->userRepository = $userRepository;
     }
 
+    /**
+     * @param mixed $value
+     * @param Constraint $constraint
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function validate($value, Constraint $constraint)
     {
-        if($this->userRepository->findOneBy(['credential.email' => $value]) === null){
+        if(!$this->userRepository->findOneByEmail($value) instanceof User){
             return;
         }
 

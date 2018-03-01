@@ -4,13 +4,11 @@ namespace App\Handler;
 
 use App\Command\CreateUserCommand;
 use App\Entity\User;
-use App\Entity\UserRole;
+use App\Repository\UserRepository;
 use App\Security\UserRoleProvider;
-use MsgPhp\User\Infra\Doctrine\Repository\UserRepository;
-use MsgPhp\User\Infra\Doctrine\Repository\UserRoleRepository;
-use MsgPhp\User\Password\PasswordHashing;
-use MsgPhp\User\UserId;
-use Ramsey\Uuid\Generator\RandomGeneratorFactory;
+use App\Util\Str;
+use FOS\UserBundle\Util\Canonicalizer;
+use FOS\UserBundle\Util\CanonicalizerInterface;
 
 class CreateUserHandler
 {
@@ -20,38 +18,30 @@ class CreateUserHandler
     private $userRepository;
 
     /**
-     * @var UserRoleRepository
+     * @var Canonicalizer
      */
-    private $userRoleRepository;
+    private $canonicalizer;
 
-    /**
-     * @var PasswordHashing
-     */
-    private $passwordHashing;
-
-    public function __construct(
-        UserRepository $userRepository,
-        UserRoleRepository $userRoleRepository,
-        PasswordHashing $passwordHashing
-    ) {
+    public function __construct(UserRepository $userRepository, CanonicalizerInterface $canonicalizer)
+    {
         $this->userRepository = $userRepository;
-        $this->userRoleRepository = $userRoleRepository;
-        $this->passwordHashing = $passwordHashing;
+        $this->canonicalizer = $canonicalizer;
     }
 
     public function handle(CreateUserCommand $createUserCommand)
     {
-        $user = new User(
-            new UserId($createUserCommand->getId()),
-            $createUserCommand->getEmail(),
-            $this->passwordHashing->hash($createUserCommand->getPassword())
-        );
+        $user = new User();
+        $user->setEmail($createUserCommand->getEmail());
+        $user->setEmailCanonical($this->canonicalizer->canonicalize($createUserCommand->getEmail()));
+        $user->setPlainPassword($createUserCommand->getPassword());
+        $user->addRole(UserRoleProvider::ROLE_AGENT);
 
+        do {
+            $token = Str::random(5);
+        } while (count($this->userRepository->findBy(['confirmationToken' => $token])) === 1);
 
-        $user->setConfirmationToken(base64_encode(random_bytes(5)));
-        $role = new UserRole($user, UserRoleProvider::ROLE_AGENT);
+        $user->setConfirmationToken(Str::random(10));
 
         $this->userRepository->save($user);
-        $this->userRoleRepository->save($role);
     }
 }

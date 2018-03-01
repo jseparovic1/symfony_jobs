@@ -7,12 +7,13 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 /**
- * Class UserPasswordValidator
+ * Class PasswordConfirmValidator
  */
 class PasswordConfirmValidator extends ConstraintValidator
 {
     /**
-     * {@inheritdoc}
+     * @param mixed $entity
+     * @param Constraint|PasswordConfirm $constraint
      */
     public function validate($entity, Constraint $constraint)
     {

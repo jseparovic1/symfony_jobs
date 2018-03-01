@@ -1,13 +1,14 @@
 security:
     encoders:
-        MsgPhp\User\Infra\Security\SecurityUser: bcrypt
+        FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_AGENT
         ROLE_AGENT: ROLE_USER
 
     providers:
-         msgphp_user: { id: MsgPhp\User\Infra\Security\SecurityUserProvider }
+        fos_userbundle:
+            id: fos_user.user_provider.username
 
     firewalls:
         dev:
@@ -34,7 +35,7 @@ security:
                     - lexik_jwt_authentication.jwt_token_authenticator
 
         main:
-            provider: msgphp_user
+            provider: fos_userbundle
             anonymous: true
 
     access_control:
