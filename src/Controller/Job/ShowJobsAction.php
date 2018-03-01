@@ -8,8 +8,8 @@ use App\Repository\JobRepository;
 
 class ShowJobsAction extends BaseAction
 {
-    public function __invoke(CompanyRepository $companyRepository)
+    public function __invoke(JobRepository $jobRepository)
     {
-        return $this->createView(['data' => $companyRepository->findAll()]);
+        return $this->createView(['data' => $jobRepository->findAll()]);
     }
 }

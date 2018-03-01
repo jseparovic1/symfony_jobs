@@ -2,6 +2,23 @@ index:
     path: /
     controller: App\Controller\HomeController::index
 
+#   Auth
+action.register:
+    path: /register
+    methods: [POST]
+    controller: App\Controller\Auth\RegisterAgentAction
+
 action.show_jobs:
     path: /jobs
+    methods: [GET]
     controller: App\Controller\Job\ShowJobsAction
+
+action.create_job:
+    path: /jobs
+    methods: [POST]
+    controller: App\Controller\Job\CreateJobAction
+
+action.create_company:
+    path: /company
+    methods: [POST]
+    controller: App\Controller\Job\CreateCompanyAction

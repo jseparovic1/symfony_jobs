@@ -19,9 +19,9 @@
         </field>
         <many-to-one
                 field="agent"
-                target-entity="App\Entity\Agent"
+                target-entity="App\Entity\User"
                 inversed-by="companies">
-            <join-column name="agent_id"/>
+            <join-column name="user_id"/>
         </many-to-one>
     </entity>
 </doctrine-mapping>
