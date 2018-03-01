@@ -139,7 +139,7 @@ class Job implements ResourceInterface
     /**
      * @return Company
      */
-    public function getCompany(): Company
+    public function getCompany(): ?Company
     {
         return $this->company;
     }
@@ -147,7 +147,7 @@ class Job implements ResourceInterface
     /**
      * @param Company $company
      */
-    public function setCompany(Company $company): void
+    public function setCompany(?Company $company): void
     {
         $this->company = $company;
     }

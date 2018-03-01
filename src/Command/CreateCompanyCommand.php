@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Entity\Company;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 

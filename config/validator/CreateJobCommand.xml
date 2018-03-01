@@ -22,5 +22,15 @@
         <property name="title">
             <constraint name="NotBlank" />
         </property>
+        <property name="companyLogo">
+            <constraint name="App\Validator\Constraint\Logo">
+                <option name="groups">logo</option>
+            </constraint>
+        </property>
+        <property name="companyId">
+            <constraint name="App\Validator\Constraint\CompanyExists">
+                <option name="groups">company_id</option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>

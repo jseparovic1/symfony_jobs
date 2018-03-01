@@ -3,9 +3,13 @@
 namespace App\Entity;
 
 use Gedmo\Timestampable\Traits\Timestampable;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 /**
  * Class Company
+ * @Vich\Uploadable
  */
 class Company implements ResourceInterface
 {
@@ -19,6 +23,12 @@ class Company implements ResourceInterface
 
     /** @var string */
     private $logo;
+
+    /**
+     * @var UploadedFile
+     * @Vich\UploadableField(mapping="logos", fileNameProperty="logo")
+     */
+    private $logoFile;
 
     /** @var string */
     private $slogan;
@@ -115,5 +125,25 @@ class Company implements ResourceInterface
     public function setAgent(User $agent): void
     {
         $this->agent = $agent;
+    }
+
+    /**
+     * @return UploadedFile
+     */
+    public function getLogoFile(): ?UploadedFile
+    {
+        return $this->logoFile;
+    }
+
+    /**
+     * @param UploadedFile $logoFile
+     */
+    public function setLogoFile(?UploadedFile $logoFile): void
+    {
+        $this->logoFile = $logoFile;
+
+        if (null !== $logoFile) {
+            $this->updatedAt = new \DateTime('now');
+        }
     }
 }

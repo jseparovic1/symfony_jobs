@@ -10,11 +10,14 @@ services:
         public: false
         bind:
           $validationErrorViewClass: App\View\ValidationErrorView
+          $kernelRootDir: '%kernel.root_dir%'
           $debug: true
           League\Tactician\CommandBus: '@tactician.commandbus.default'
           App\Factory\ValidationErrorViewFactoryInterface:  '@App\Factory\ValidationErrorViewFactory'
           FOS\RestBundle\Util\ExceptionValueMap: '@fos_rest.exception.codes_map'
           FOS\UserBundle\Util\CanonicalizerInterface: '@fos_user.util.canonicalizer.default'
+          Vich\UploaderBundle\Handler\UploadHandler: '@vich_uploader.upload_handler'
+
     App\:
         resource: '../src/*'
         exclude: '../src/{Entity,Migrations,Tests,Kernel.php,Handler}'
