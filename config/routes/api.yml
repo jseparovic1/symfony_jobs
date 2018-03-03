@@ -29,3 +29,8 @@ action.create_company:
     path: /company
     methods: [POST]
     controller: App\Controller\Job\CreateCompanyAction
+
+action.company_edit:
+    path: /company/{id}
+    methods: [PUT]
+    controller: App\Controller\Company\EditCompanyAction
