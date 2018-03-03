@@ -19,9 +19,21 @@ class BaseAction extends AbstractController
      */
     protected $bus;
 
-    public function __construct(ViewHandlerInterface $viewHandler, CommandBus $bus)
+    /**
+     * @required
+     * @param ViewHandlerInterface $viewHandler
+     */
+    public function setViewHandler(ViewHandlerInterface $viewHandler)
     {
         $this->viewHandler = $viewHandler;
+    }
+
+    /**
+     * @required
+     * @param CommandBus $bus
+     */
+    public function setCommandBus(CommandBus $bus)
+    {
         $this->bus = $bus;
     }
 

@@ -18,6 +18,7 @@ services:
           FOS\UserBundle\Util\CanonicalizerInterface: '@fos_user.util.canonicalizer.default'
           Vich\UploaderBundle\Templating\Helper\UploaderHelper: '@vich_uploader.templating.helper.uploader_helper'
           Vich\UploaderBundle\Handler\UploadHandler: '@vich_uploader.upload_handler'
+
     App\:
         resource: '../src/*'
         exclude: '../src/{Entity,Migrations,Tests,Kernel.php,Handler}'

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Command;
+use App\Entity\ResourceInterface;
 
 
 /**
@@ -12,6 +13,9 @@ class Command
 
     /** @var array */
     protected $validationGroups = ['Default'];
+
+    /** @var ResourceInterface|null */
+    protected $entity = null;
 
     public function addValidationGroup(string $group)
     {
@@ -36,5 +40,21 @@ class Command
     public function turnOffBusValidation()
     {
         $this->validate = false;
+    }
+
+    /**
+     * @return ResourceInterface|null
+     */
+    public function getEntity(): ?ResourceInterface
+    {
+        return $this->entity;
+    }
+
+    /**
+     * @param ResourceInterface|null $entity
+     */
+    public function setEntity(?ResourceInterface $entity): void
+    {
+        $this->entity = $entity;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Agent;
+use App\Entity\User;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class AgentRepository extends BaseRepository
@@ -13,6 +13,6 @@ class AgentRepository extends BaseRepository
      */
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Agent::class);
+        parent::__construct($registry, User::class);
     }
 }

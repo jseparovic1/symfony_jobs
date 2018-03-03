@@ -51,7 +51,7 @@ class Job implements ResourceInterface
     /**
      * @param string $description
      */
-    public function setDescription(string $description): void
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
@@ -67,7 +67,7 @@ class Job implements ResourceInterface
     /**
      * @param string $website
      */
-    public function setWebsite(string $website): void
+    public function setWebsite(?string $website): void
     {
         $this->website = $website;
     }
@@ -83,7 +83,7 @@ class Job implements ResourceInterface
     /**
      * @param string $location
      */
-    public function setLocation(string $location): void
+    public function setLocation(?string $location): void
     {
         $this->location = $location;
     }
@@ -115,7 +115,7 @@ class Job implements ResourceInterface
     /**
      * @param string $title
      */
-    public function setTitle(string $title): void
+    public function setTitle(?string $title): void
     {
         $this->title = $title;
     }
