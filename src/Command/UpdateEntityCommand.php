@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class UpdateEntityCommand
  */
-class UpdateEntityFieldsCommand extends Command
+class UpdateEntityCommand extends Command
 {
     /** @var array */
     protected $allowed;
@@ -18,15 +18,16 @@ class UpdateEntityFieldsCommand extends Command
     /** @var array */
     protected $input;
 
-    /** @var ResourceInterface */
-    protected $entity;
+    /** @var string */
+    protected $entityClass;
 
-    /** @var bool */
-    protected $validate = false;
+    /** @var mixed */
+    private $entityId;
 
-    public function __construct(ResourceInterface $entity, array $input, array $allowed)
+    public function __construct(string $entity, $entityId, array $input, array $allowed)
     {
-        $this->entity = $entity;
+        $this->entityClass = $entity;
+        $this->entityId = $entityId;
         $this->input = $input;
         $this->allowed = $allowed;
     }
@@ -48,10 +49,18 @@ class UpdateEntityFieldsCommand extends Command
     }
 
     /**
-     * @return ResourceInterface
+     * @return string
      */
-    public function getEntity(): ResourceInterface
+    public function getEntityClass(): string
     {
-        return $this->entity;
+        return $this->entityClass;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEntityId()
+    {
+        return $this->entityId;
     }
 }
