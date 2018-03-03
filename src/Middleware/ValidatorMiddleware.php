@@ -2,6 +2,7 @@
 
 namespace App\Middleware;
 
+use App\Command\Command;
 use App\Exception\CommandValidationException;
 use App\Factory\ValidationErrorViewFactoryInterface;
 use FOS\RestBundle\View\View;
@@ -43,14 +44,18 @@ class ValidatorMiddleware implements Middleware
     }
 
     /**
-     * @param object $command
+     * @param object|Command $command
      * @param callable $next
      * @return mixed
      * @throws CommandValidationException
      */
     public function execute($command, callable $next)
     {
-        $constraintViolations = $this->validator->validate($command);
+        if ($command instanceof Command) {
+            $constraintViolations = $this->validator->validate($command, null, $command->getValidationGroups());
+        } else {
+            $constraintViolations = $this->validator->validate($command);
+        }
 
         if (count($constraintViolations) > 0) {
             throw new CommandValidationException($constraintViolations);

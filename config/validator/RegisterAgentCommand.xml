@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
+        http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+    <class name="App\Command\RegisterAgentCommand">
+        <constraint name="App\Validator\Constraint\PasswordConfirm">
+            <option name="message">Password does not match the confirm password.</option>
+            <option name="field">password</option>
+            <option name="confirmField">passwordConfirm</option>
+        </constraint>
+        <property name="email">
+            <constraint name="NotBlank" />
+            <constraint name="Email" />
+            <constraint name="App\Validator\Constraint\UniqueEmail" />
+        </property>
+        <property name="password">
+            <constraint name="NotBlank" />
+            <constraint name="Length">
+                <option name="min">5</option>
+                <option name="minMessage">Password must be at least {{ limit }} characters long</option>
+            </constraint>
+        </property>
+        <property name="passwordConfirm">
+            <constraint name="NotBlank" />
+        </property>
+    </class>
+</constraint-mapping>
