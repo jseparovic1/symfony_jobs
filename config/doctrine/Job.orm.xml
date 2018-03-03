@@ -21,6 +21,6 @@
         <field name="updatedAt" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
-        <many-to-one field="company" target-entity="App\Entity\Company"/>
+        <many-to-one field="company" target-entity="App\Entity\Company" fetch="EAGER"/>
     </entity>
 </doctrine-mapping>

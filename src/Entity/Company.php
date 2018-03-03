@@ -3,9 +3,14 @@
 namespace App\Entity;
 
 use Gedmo\Timestampable\Traits\Timestampable;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 /**
  * Class Company
+ * @Vich\Uploadable
  */
 class Company implements ResourceInterface
 {
@@ -20,13 +25,16 @@ class Company implements ResourceInterface
     /** @var string */
     private $logo;
 
+    /**
+     * @var UploadedFile
+     * @Vich\UploadableField(mapping="logos", fileNameProperty="logo")
+     */
+    private $logoFile;
+
     /** @var string */
     private $slogan;
 
-    /** @var string */
-    private $contactEmail;
-
-    /** @var Agent */
+    /** @var User */
     private $agent;
 
     /**
@@ -86,34 +94,38 @@ class Company implements ResourceInterface
     }
 
     /**
-     * @return string
+     * @return User
      */
-    public function getContactEmail(): string
-    {
-        return $this->contactEmail;
-    }
-
-    /**
-     * @param string $email
-     */
-    public function setContactEmail(string $email): void
-    {
-        $this->contactEmail = $email;
-    }
-
-    /**
-     * @return Agent
-     */
-    public function getAgent(): Agent
+    public function getAgent(): ?User
     {
         return $this->agent;
     }
 
     /**
-     * @param Agent $agent
+     * @param User $agent
      */
-    public function setAgent(Agent $agent): void
+    public function setAgent(User $agent): void
     {
         $this->agent = $agent;
+    }
+
+    /**
+     * @return UploadedFile|File
+     */
+    public function getLogoFile(): ?UploadedFile
+    {
+        return $this->logoFile;
+    }
+
+    /**
+     * @param UploadedFile|File $logoFile
+     */
+    public function setLogoFile(?File $logoFile): void
+    {
+        $this->logoFile = $logoFile;
+
+        if (null !== $logoFile) {
+            $this->updatedAt = new \DateTime('now');
+        }
     }
 }

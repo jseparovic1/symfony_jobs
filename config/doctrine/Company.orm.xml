@@ -10,7 +10,6 @@
         <field name="name"/>
         <field name="logo" nullable="true"/>
         <field name="slogan" nullable="true"/>
-        <field name="contactEmail" nullable="true"/>
         <field name="createdAt" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

@@ -3,13 +3,20 @@
 namespace App\Controller\Job;
 
 use App\Controller\BaseAction;
+use App\Factory\JobViewFactory;
 use App\Repository\CompanyRepository;
 use App\Repository\JobRepository;
+use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 class ShowJobsAction extends BaseAction
 {
-    public function __invoke(CompanyRepository $companyRepository)
+    public function __invoke(JobRepository $jobRepository, JobViewFactory $jobViewFactory, UploaderHelper $helper)
     {
-        return $this->createView(['data' => $companyRepository->findAll()]);
+        $jobs = $jobRepository->findAll();
+
+        foreach ($jobs as $job) {
+            $data[] = $jobViewFactory->create($job);
+        }
+        return $this->createView($data);
     }
 }
