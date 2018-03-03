@@ -5,7 +5,7 @@ namespace App\Command;
 /**
  * Class CreateUserCommand
  */
-class CreateUserCommand
+class CreateUserCommand extends Command
 {
     /** @var string */
     private $email;

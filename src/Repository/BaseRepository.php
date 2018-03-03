@@ -7,7 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-abstract class BaseRepository extends ServiceEntityRepository
+abstract class BaseRepository extends ServiceEntityRepository implements RepositoryInterface
 {
     /**
      * @param $class

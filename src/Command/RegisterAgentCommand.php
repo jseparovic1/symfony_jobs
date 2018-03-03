@@ -4,7 +4,7 @@ namespace App\Command;
 
 use Symfony\Component\HttpFoundation\Request;
 
-class RegisterAgentCommand
+class RegisterAgentCommand extends Command
 {
     /** @var string */
     private $email;

@@ -51,10 +51,18 @@ class ValidatorMiddleware implements Middleware
      */
     public function execute($command, callable $next)
     {
-        if ($command instanceof Command) {
-            $constraintViolations = $this->validator->validate($command, null, $command->getValidationGroups());
-        } else {
-            $constraintViolations = $this->validator->validate($command);
+        $constraintViolations = [];
+
+        if ($command->needsToBeValidated()) {
+            if ($command->getEntity() !== null) {
+                $validateClass = $command->getEntity();
+            }
+
+            $constraintViolations = $this->validator->validate(
+                $validateClass ?? $command,
+                null,
+                $command->getValidationGroups()
+            );
         }
 
         if (count($constraintViolations) > 0) {

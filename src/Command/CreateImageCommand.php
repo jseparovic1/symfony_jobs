@@ -5,7 +5,7 @@ namespace App\Command;
 /**
  * Class CreateImageCommand
  */
-class CreateImageCommand
+class CreateImageCommand extends Command
 {
     /**
      * @var string

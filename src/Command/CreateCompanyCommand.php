@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class CreateJobCommand
  */
-class CreateCompanyCommand
+class CreateCompanyCommand extends Command
 {
     /** @var string */
     public $name;

@@ -8,16 +8,23 @@ action.register:
     methods: [POST]
     controller: App\Controller\Auth\RegisterAgentAction
 
-action.show_jobs:
+#   Job
+action.job_show_list:
     path: /jobs
     methods: [GET]
     controller: App\Controller\Job\ShowJobsAction
 
-action.create_job:
+action.job_create:
     path: /jobs
     methods: [POST]
     controller: App\Controller\Job\CreateJobAction
 
+action.job_edit:
+    path: /job/{id}
+    methods: [PUT]
+    controller: App\Controller\Job\EditJobAction
+
+#   Company
 action.create_company:
     path: /company
     methods: [POST]

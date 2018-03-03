@@ -13,7 +13,7 @@
         <field name="remote" type="boolean"/>
         <field name="title"/>
         <field name="slug" length="156" unique="true">
-            <gedmo:slug unique="true" style="camel" updatable="false" separator="_" fields="title,location" />
+            <gedmo:slug unique="true" style="default" updatable="false" separator="-" fields="title" />
         </field>
         <field name="createdAt" type="datetime">
             <gedmo:timestampable on="create"/>
