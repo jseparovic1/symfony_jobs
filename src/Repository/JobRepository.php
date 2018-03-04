@@ -27,11 +27,12 @@ class JobRepository extends BaseRepository
     public function createJobListQueryBuilder($search, $remote = null)
     {
         $queryBuilder = $this->createQueryBuilder('job')
-            ->andWhere('job.search LIKE :location OR job.title LIKE :search')
+            ->andWhere('job.location LIKE :search OR job.title LIKE :search')
+            ->addOrderBy('job.createdAt', 'DESC')
             ->setParameter('search', '%'.$search.'%')
             ->orderBy('job.createdAt');
 
-        if ($remote) {
+        if ($remote === 'true') {
             $remoteCriteria = Criteria::create()->where(Criteria::expr()->eq("remote", true));
             $queryBuilder->addCriteria($remoteCriteria);
         }
