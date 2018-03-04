@@ -6,6 +6,8 @@
 /vendor/
 /.idea
 /config/jwt/*
+/public/logos/*
+!/public/logos/.gitkeep
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
