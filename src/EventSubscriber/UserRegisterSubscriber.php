@@ -14,9 +14,15 @@ class UserRegisterSubscriber  implements EventSubscriberInterface
      */
     private $sender;
 
-    public function __construct(Sender $sender)
+    /**
+     * @var string
+     */
+    private $frontendUrl;
+
+    public function __construct(Sender $sender, string $frontendUrl)
     {
         $this->sender = $sender;
+        $this->frontendUrl = $frontendUrl;
     }
 
     /**
@@ -40,9 +46,12 @@ class UserRegisterSubscriber  implements EventSubscriberInterface
 
         $this->sender->sendEmail(
             'emails/userActivation.html.twig',
-            'Account Activation',
-            $user->getEmailCanonical(),
-            ['userName' => $user->getEmail()]
+            'Account activation @symfonyjobs.io',
+            $user->getEmailCanonical(), [
+                'name' => $user->getName(),
+                'code' => $user->getConfirmationToken(),
+                'frontendUrl' => $this->frontendUrl
+            ]
         );
     }
 }

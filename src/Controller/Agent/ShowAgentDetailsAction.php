@@ -29,6 +29,7 @@ class ShowAgentDetailsAction extends BaseAction
         $user = $this->tokenStorage->getToken()->getUser();
 
         $agentView = new AgentView();
+        $agentView->name = $user->getName();
         $agentView->email = $user->getEmailCanonical();
         $agentView->memberSince = $user->getCreatedAt();
 

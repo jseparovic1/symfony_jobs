@@ -30,6 +30,7 @@ class RegisterAgentHandler
     public function handle(RegisterAgentCommand $registerAgentCommand)
     {
         $user = $this->bus->handle(new CreateUserCommand(
+            $registerAgentCommand->getName(),
             $registerAgentCommand->getEmail(),
             $registerAgentCommand->getPassword()
         ));

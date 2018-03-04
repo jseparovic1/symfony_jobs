@@ -8,6 +8,7 @@
             <generator strategy="CUSTOM"/>
             <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator"/>
         </id>
+        <field name="name"/>
         <field name="createdAt" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

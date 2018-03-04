@@ -10,6 +10,12 @@
             <option name="field">password</option>
             <option name="confirmField">passwordConfirm</option>
         </constraint>
+        <property name="name">
+            <constraint name="NotBlank" />
+            <constraint name="Length">
+                <option name="min">2</option>
+            </constraint>
+        </property>
         <property name="email">
             <constraint name="NotBlank" />
             <constraint name="Email" />

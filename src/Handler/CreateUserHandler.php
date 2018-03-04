@@ -32,6 +32,7 @@ class CreateUserHandler
     public function handle(CreateUserCommand $createUserCommand): ?UserInterface
     {
         $user = new User();
+        $user->setName($createUserCommand->getName());
         $user->setEmail($createUserCommand->getEmail());
         $user->setEmailCanonical($this->canonicalizer->canonicalize($createUserCommand->getEmail()));
         $user->setPlainPassword($createUserCommand->getPassword());
