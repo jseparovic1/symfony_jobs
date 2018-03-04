@@ -5,6 +5,7 @@ namespace App\Controller\Auth;
 use App\Command\RegisterAgentCommand;
 use App\Controller\BaseAction;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class RegisterAgentAction extends BaseAction
 {
@@ -12,9 +13,6 @@ class RegisterAgentAction extends BaseAction
     {
         $this->bus->handle(new RegisterAgentCommand($request));
 
-        return $this->createView([
-            'status' => '200',
-            'message' => 'User created successfully.'
-        ]);
+        return $this->createView([], Response::HTTP_CREATED);
     }
 }

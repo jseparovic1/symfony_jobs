@@ -12,6 +12,7 @@ services:
           $validationErrorViewClass: App\View\ValidationErrorView
           $kernelRootDir: '%kernel.root_dir%'
           $debug: true
+          $fromEmail: 'no-reply@symfonyjobs.io'
           League\Tactician\CommandBus: '@tactician.commandbus.default'
           App\Factory\ValidationErrorViewFactoryInterface:  '@App\Factory\ValidationErrorViewFactory'
           FOS\RestBundle\Util\ExceptionValueMap: '@fos_rest.exception.codes_map'
