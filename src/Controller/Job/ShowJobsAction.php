@@ -3,20 +3,23 @@
 namespace App\Controller\Job;
 
 use App\Controller\BaseAction;
-use App\Factory\JobViewFactory;
-use App\Repository\CompanyRepository;
-use App\Repository\JobRepository;
-use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
+use App\ViewRepository\JobsViewRepository;
+use Symfony\Component\HttpFoundation\Request;
 
 class ShowJobsAction extends BaseAction
 {
-    public function __invoke(JobRepository $jobRepository, JobViewFactory $jobViewFactory, UploaderHelper $helper)
+    /**
+     * @param Request $request
+     * @param JobsViewRepository $jobsViewRepository
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\Query\QueryException
+     */
+    public function __invoke(Request $request, JobsViewRepository $jobsViewRepository)
     {
-        $jobs = $jobRepository->findAll();
-
-        foreach ($jobs as $job) {
-            $data[] = $jobViewFactory->create($job);
-        }
-        return $this->createView($data);
+        return $this->createView($jobsViewRepository->findAllJobs(
+            $request,
+            $request->query->get('search'),
+            $request->query->get('remote')
+        ));
     }
 }
