@@ -19,6 +19,8 @@ services:
           Vich\UploaderBundle\Templating\Helper\UploaderHelper: '@vich_uploader.templating.helper.uploader_helper'
           Vich\UploaderBundle\Handler\UploadHandler: '@vich_uploader.upload_handler'
 
+    Vich\UploaderBundle\Naming\UniqidNamer: '@vich_uploader.namer_uniqid'
+
     App\:
         resource: '../src/*'
         exclude: '../src/{Entity,Migrations,Tests,Kernel.php,Handler}'

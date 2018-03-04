@@ -4,6 +4,8 @@ namespace App\Command;
 
 use App\Entity\Company;
 use App\Entity\User;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -17,11 +19,8 @@ class CreateCompanyCommand extends Command
     /** @var string */
     public $logo;
 
-    /** @var string */
+    /** @var UploadedFile|File */
     public $slogan;
-
-    /** @var bool */
-    public $contactEmail;
 
     /** @var User */
     public $agent;
@@ -29,9 +28,8 @@ class CreateCompanyCommand extends Command
     public function __construct(Request $request, User $agent)
     {
         $this->name = $request->request->get('name');
-        $this->logo = $request->request->get('logo');
+        $this->logo = $request->files->get('logo');
         $this->slogan = $request->request->get('slogan');
-        $this->contactEmail = $request->request->get('contactEmail');
         $this->agent = $agent;
     }
 }
