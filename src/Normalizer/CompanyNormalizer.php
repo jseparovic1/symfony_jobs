@@ -17,7 +17,6 @@ class CompanyNormalizer implements NormalizerInterface
     {
         return [
             'name' => $object->getName(),
-            'contact' => $object->getContactEmail(),
             'logo' => $object->getLogo(),
             'slogan' => $object->getSlogan(),
         ];

@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
+use Gedmo\Timestampable\Traits\Timestampable;
 
 class User extends BaseUser implements ResourceInterface
 {
+    use Timestampable;
+
     /** @var mixed */
     protected $id;
 

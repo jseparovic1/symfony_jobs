@@ -22,11 +22,9 @@ class CreateCompanyHandler
     {
         $company = new Company();
 
-        $company->setContactEmail($createCompanyCommand->contactEmail);
         $company->setName($createCompanyCommand->name);
         $company->setSlogan($createCompanyCommand->slogan);
-        $company->setLogo($createCompanyCommand->logo);
-
+        $company->setLogoFile($createCompanyCommand->logo);
         $company->setAgent($createCompanyCommand->agent);
 
         $this->companyRepository->save($company);

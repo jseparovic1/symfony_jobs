@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Job;
 use Doctrine\Common\Collections\Criteria;
+use FOS\UserBundle\Model\UserInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class JobRepository extends BaseRepository
@@ -38,5 +39,17 @@ class JobRepository extends BaseRepository
         }
 
         return $queryBuilder;
+    }
+
+    public function findByUser(UserInterface $user)
+    {
+        $queryBuilder = $this->createQueryBuilder('job')
+            ->innerJoin('job.company', 'company')
+            ->andWhere('company.agent = :agent')
+            ->orderBy('job.createdAt')
+            ->setParameter('agent', $user)
+        ;
+
+        return $queryBuilder->getQuery()->getResult();
     }
 }
