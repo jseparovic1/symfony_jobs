@@ -16,6 +16,9 @@ class User extends BaseUser implements ResourceInterface
     /** @var Collection|Company[] */
     private $companies;
 
+    /** @var string */
+    private $name;
+
     /**
      * @return mixed
      */
@@ -65,5 +68,21 @@ class User extends BaseUser implements ResourceInterface
         if ($this->companies->contains($company)) {
             $this->companies->remove($company);
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(?string $name): void
+    {
+        $this->name = $name;
     }
 }

@@ -3,8 +3,9 @@
 namespace App\Event;
 
 use App\Entity\User;
+use Symfony\Component\EventDispatcher\Event;
 
-class UserEvent
+class UserEvent extends Event
 {
     /**
      * @var User

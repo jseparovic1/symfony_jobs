@@ -13,10 +13,14 @@ class CreateUserCommand extends Command
     /** @var string */
     private $password;
 
-    public function __construct(string $email, string $password)
+    /** @var string */
+    private $name;
+
+    public function __construct(string $name, string $email, string $password)
     {
         $this->email = $email;
         $this->password = $password;
+        $this->name = $name;
     }
 
     public function getEmail(): string
@@ -27,5 +31,10 @@ class CreateUserCommand extends Command
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 }

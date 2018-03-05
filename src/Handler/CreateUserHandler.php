@@ -9,6 +9,7 @@ use App\Security\UserRoleProvider;
 use App\Util\Str;
 use FOS\UserBundle\Util\Canonicalizer;
 use FOS\UserBundle\Util\CanonicalizerInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class CreateUserHandler
 {
@@ -28,9 +29,10 @@ class CreateUserHandler
         $this->canonicalizer = $canonicalizer;
     }
 
-    public function handle(CreateUserCommand $createUserCommand)
+    public function handle(CreateUserCommand $createUserCommand): ?UserInterface
     {
         $user = new User();
+        $user->setName($createUserCommand->getName());
         $user->setEmail($createUserCommand->getEmail());
         $user->setEmailCanonical($this->canonicalizer->canonicalize($createUserCommand->getEmail()));
         $user->setPlainPassword($createUserCommand->getPassword());
@@ -43,5 +45,7 @@ class CreateUserHandler
         $user->setConfirmationToken(Str::random(10));
 
         $this->userRepository->save($user);
+
+        return $user;
     }
 }

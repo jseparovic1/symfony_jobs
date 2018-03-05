@@ -4,8 +4,10 @@ namespace App\Handler;
 
 use App\Command\CreateUserCommand;
 use App\Command\RegisterAgentCommand;
+use App\Event\UserEvent;
+use App\Util\UserEvents;
 use League\Tactician\CommandBus;
-use Ramsey\Uuid\Uuid;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class RegisterAgentHandler
 {
@@ -14,16 +16,25 @@ class RegisterAgentHandler
      */
     private $bus;
 
-    public function __construct(CommandBus $bus)
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
+    public function __construct(CommandBus $bus, EventDispatcherInterface $eventDispatcher)
     {
         $this->bus = $bus;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function handle(RegisterAgentCommand $registerAgentCommand)
     {
-        $this->bus->handle(new CreateUserCommand(
+        $user = $this->bus->handle(new CreateUserCommand(
+            $registerAgentCommand->getName(),
             $registerAgentCommand->getEmail(),
             $registerAgentCommand->getPassword()
         ));
+
+        $this->eventDispatcher->dispatch(UserEvents::USER_REGISTER, new UserEvent($user));
     }
 }

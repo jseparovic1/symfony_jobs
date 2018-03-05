@@ -15,8 +15,12 @@ class RegisterAgentCommand extends Command
     /** @var string */
     private $passwordConfirm;
 
+    /** @var string */
+    private $name;
+
     public function __construct(Request $request)
     {
+        $this->name = $request->request->get('name');
         $this->email = $request->request->get('email');
         $this->password = $request->request->get('password');
         $this->passwordConfirm = $request->request->get('passwordConfirm');
@@ -35,5 +39,10 @@ class RegisterAgentCommand extends Command
     public function getPasswordConfirm(): string
     {
         return $this->passwordConfirm;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 }
