@@ -39,6 +39,7 @@ security:
             anonymous: true
 
     access_control:
+        - { path: ^/api/activate, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/jobs, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [GET]}
         - { path: ^/api/jobs, roles: ROLE_AGENT, methods: [POST] }
         - { path: ^/api/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }

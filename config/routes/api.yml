@@ -3,10 +3,15 @@ index:
     controller: App\Controller\HomeController::index
 
 #   Auth
-action.register:
+action.auth_register:
     path: /register
     methods: [POST]
     controller: App\Controller\Auth\RegisterAgentAction
+
+action.auth_activate:
+    path: /activate
+    methods: [PUT,POST]
+    controller: App\Controller\Auth\ActivateUserAction
 
 #   Job
 action.job_show_list:

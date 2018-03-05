@@ -49,6 +49,7 @@ class UserRegisterSubscriber  implements EventSubscriberInterface
             'Account activation @symfonyjobs.io',
             $user->getEmailCanonical(), [
                 'name' => $user->getName(),
+                'userId' => $user->getId(),
                 'code' => $user->getConfirmationToken(),
                 'frontendUrl' => $this->frontendUrl
             ]
