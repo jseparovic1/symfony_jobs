@@ -29,6 +29,21 @@ class Job implements ResourceInterface
     /** @var string */
     private $slug;
 
+    /** @var \DateTime */
+    private $expirationDate;
+
+    /** @var bool */
+    private $renewed;
+
+    /** @var bool */
+    private $fulfilled;
+
+    /** @var bool */
+    private $active;
+
+    /** @var bool */
+    private $refunded;
+
     /** @var Company */
     private $company;
 
@@ -150,5 +165,85 @@ class Job implements ResourceInterface
     public function setCompany(?Company $company): void
     {
         $this->company = $company;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getExpirationDate(): \DateTime
+    {
+        return $this->expirationDate;
+    }
+
+    /**
+     * @param \DateTime $expirationDate
+     */
+    public function setExpirationDate(\DateTime $expirationDate): void
+    {
+        $this->expirationDate = $expirationDate;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRenewed(): bool
+    {
+        return $this->renewed;
+    }
+
+    /**
+     * @param bool $renewed
+     */
+    public function setRenewed(bool $renewed): void
+    {
+        $this->renewed = $renewed;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFulfilled(): bool
+    {
+        return $this->fulfilled;
+    }
+
+    /**
+     * @param bool $fulfilled
+     */
+    public function setFulfilled(bool $fulfilled): void
+    {
+        $this->fulfilled = $fulfilled;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param bool $active
+     */
+    public function setActive(bool $active): void
+    {
+        $this->active = $active;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRefunded(): bool
+    {
+        return $this->refunded;
+    }
+
+    /**
+     * @param bool $refunded
+     */
+    public function setRefunded(bool $refunded): void
+    {
+        $this->refunded = $refunded;
     }
 }

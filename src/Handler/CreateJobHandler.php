@@ -7,6 +7,7 @@ use App\Entity\Company;
 use App\Entity\Job;
 use App\Repository\CompanyRepository;
 use App\Repository\JobRepository;
+use App\Util\JobExpirationCalculator;
 use League\Tactician\CommandBus;
 use Vich\UploaderBundle\Handler\UploadHandler;
 
@@ -32,16 +33,23 @@ class CreateJobHandler
      */
     private $uploadHandler;
 
+    /**
+     * @var JobExpirationCalculator
+     */
+    private $expirationCalculator;
+
     public function __construct(
         JobRepository $jobRepository,
         CompanyRepository $companyRepository,
         CommandBus $bus,
-        UploadHandler $uploadHandler
+        UploadHandler $uploadHandler,
+        JobExpirationCalculator $expirationCalculator
     ) {
         $this->jobRepository = $jobRepository;
         $this->companyRepository = $companyRepository;
         $this->bus = $bus;
         $this->uploadHandler = $uploadHandler;
+        $this->expirationCalculator = $expirationCalculator;
     }
 
     public function handle(CreateJobCommand $createJobCommand)
@@ -53,6 +61,7 @@ class CreateJobHandler
         $job->setLocation($createJobCommand->location);
         $job->setRemote($createJobCommand->remote);
         $job->setWebsite($createJobCommand->website);
+        $job->setExpirationDate($this->expirationCalculator->getExpirationDate());
 
         $company = null;
         if ($id = $createJobCommand->companyId) {
