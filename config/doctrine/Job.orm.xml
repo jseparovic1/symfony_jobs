@@ -13,16 +13,16 @@
         <field name="remote" type="boolean"/>
         <field name="title"/>
         <field name="expirationDate" type="datetime" />
-        <field name="active">
+        <field name="active" type="boolean">
             <options><option name="default">1</option></options>
         </field>
         <field name="renewed" type="boolean">
             <options><option name="default">0</option></options>
         </field>
-        <field name="refunded">
+        <field name="refunded" type="boolean">
             <options><option name="default">0</option></options>
         </field>
-        <field name="fulfilled">
+        <field name="fulfilled" type="boolean">
             <options><option name="default">0</option></options>
         </field>
         <field name="slug" length="156" unique="true">
