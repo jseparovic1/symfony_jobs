@@ -33,16 +33,16 @@ class Job implements ResourceInterface
     private $expirationDate;
 
     /** @var bool */
-    private $renewed;
+    private $renewed = false;
 
     /** @var bool */
-    private $fulfilled;
+    private $fulfilled = false;
 
     /** @var bool */
-    private $active;
+    private $active = true;
 
     /** @var bool */
-    private $refunded;
+    private $refunded = false;
 
     /** @var Company */
     private $company;

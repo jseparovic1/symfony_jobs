@@ -28,6 +28,24 @@ class JobView
     /** @var \DateTime */
     public $createdAt;
 
+    /** @var \DateTime */
+    public $expiresAt;
+
+    /** @var bool */
+    public $renewed;
+
+    /** @var bool */
+    public $fulfilled;
+
+    /** @var bool */
+    public $active;
+
+    /** @var bool */
+    public $refunded;
+
     /** @var CompanyView */
     public $company;
+
+    /** @var string */
+    public $expiredDateForHumans;
 }

@@ -4,6 +4,7 @@ namespace App\Factory;
 
 use App\Entity\Job;
 use App\View\JobView;
+use Carbon\Carbon;
 
 final class JobViewFactory
 {
@@ -29,6 +30,11 @@ final class JobViewFactory
         $jobView->title = $job->getTitle();
         $jobView->slug = $job->getSlug();
         $jobView->createdAt = $job->getCreatedAt();
+        $jobView->expiresAt = $job->getExpirationDate();
+        $jobView->expiredDateForHumans = (Carbon::instance($job->getExpirationDate()))->diffForHumans();
+        $jobView->active = $job->isActive();
+        $jobView->renewed = $job->isRenewed();
+        $jobView->refunded = $job->isRefunded();
         $jobView->company = $this->companyViewFactory->create($job->getCompany());
 
         return $jobView;

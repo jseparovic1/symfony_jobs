@@ -61,6 +61,7 @@ class CreateJobHandler
         $job->setLocation($createJobCommand->location);
         $job->setRemote($createJobCommand->remote);
         $job->setWebsite($createJobCommand->website);
+        $job->setActive(true);
         $job->setExpirationDate($this->expirationCalculator->getExpirationDate());
 
         $company = null;

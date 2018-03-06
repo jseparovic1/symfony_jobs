@@ -7,13 +7,13 @@ use Carbon\Carbon;
 class JobExpirationCalculator
 {
     /**
-     * @return Carbon
+     * @return bool|\DateTime
      */
     public function getExpirationDate()
     {
-        $now =  Carbon::now();
+        $now = Carbon::now();
 
-        return $now->copy()->subMonthsWithOverflow(2);
+        return $now->copy()->addMonthsWithOverflow(2);
     }
 
     /**
@@ -23,6 +23,6 @@ class JobExpirationCalculator
     {
         $now =  Carbon::now();
 
-        return $now->copy()->subMonthsWithOverflow(1);
+        return $now->copy()->addMonthsWithOverflow(1);
     }
 }
