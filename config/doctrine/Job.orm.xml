@@ -13,18 +13,11 @@
         <field name="remote" type="boolean"/>
         <field name="title"/>
         <field name="expirationDate" type="datetime" />
-        <field name="active" type="boolean">
-            <options><option name="default">1</option></options>
-        </field>
+        <field name="status" />
         <field name="renewed" type="boolean">
             <options><option name="default">0</option></options>
         </field>
-        <field name="refunded" type="boolean">
-            <options><option name="default">0</option></options>
-        </field>
-        <field name="fulfilled" type="boolean">
-            <options><option name="default">0</option></options>
-        </field>
+
         <field name="slug" length="156" unique="true">
             <gedmo:slug unique="true" style="default" updatable="false" separator="-" fields="title" />
         </field>

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Util\StateMachine\JobStates;
 use Gedmo\Timestampable\Traits\Timestampable;
 
 class Job implements ResourceInterface
@@ -35,14 +36,8 @@ class Job implements ResourceInterface
     /** @var bool */
     private $renewed = false;
 
-    /** @var bool */
-    private $fulfilled = false;
-
-    /** @var bool */
-    private $active = true;
-
-    /** @var bool */
-    private $refunded = false;
+    /** @var string */
+    private $status = JobStates::STATE_CREATED;
 
     /** @var Company */
     private $company;
@@ -200,50 +195,18 @@ class Job implements ResourceInterface
     }
 
     /**
-     * @return bool
+     * @return string
      */
-    public function isFulfilled(): bool
+    public function getStatus(): string
     {
-        return $this->fulfilled;
+        return $this->status;
     }
 
     /**
-     * @param bool $fulfilled
+     * @param string $status
      */
-    public function setFulfilled(bool $fulfilled): void
+    public function setStatus(string $status): void
     {
-        $this->fulfilled = $fulfilled;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isActive(): bool
-    {
-        return $this->active;
-    }
-
-    /**
-     * @param bool $active
-     */
-    public function setActive(bool $active): void
-    {
-        $this->active = $active;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isRefunded(): bool
-    {
-        return $this->refunded;
-    }
-
-    /**
-     * @param bool $refunded
-     */
-    public function setRefunded(bool $refunded): void
-    {
-        $this->refunded = $refunded;
+        $this->status = $status;
     }
 }

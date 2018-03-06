@@ -31,17 +31,11 @@ class JobView
     /** @var \DateTime */
     public $expiresAt;
 
+    /** @var string */
+    public $status;
+
     /** @var bool */
     public $renewed;
-
-    /** @var bool */
-    public $fulfilled;
-
-    /** @var bool */
-    public $active;
-
-    /** @var bool */
-    public $refunded;
 
     /** @var CompanyView */
     public $company;

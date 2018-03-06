@@ -23,6 +23,7 @@ final class JobViewFactory
         $jobView = new JobView();
 
         $jobView->id = $job->getId();
+        $jobView->status = $job->getStatus();
         $jobView->description = $job->getDescription();
         $jobView->website = $job->getWebsite();
         $jobView->location = $job->getLocation();
@@ -32,9 +33,7 @@ final class JobViewFactory
         $jobView->createdAt = $job->getCreatedAt();
         $jobView->expiresAt = $job->getExpirationDate();
         $jobView->expiredDateForHumans = (Carbon::instance($job->getExpirationDate()))->diffForHumans();
-        $jobView->active = $job->isActive();
         $jobView->renewed = $job->isRenewed();
-        $jobView->refunded = $job->isRefunded();
         $jobView->company = $this->companyViewFactory->create($job->getCompany());
 
         return $jobView;

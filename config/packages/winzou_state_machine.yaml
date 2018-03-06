@@ -1,0 +1,46 @@
+winzou_state_machine:
+    jobs_machine:
+        class: App\Entity\Job
+        property_path: status
+        graph: job
+        states:
+            - created
+            - active
+            - expired
+            - refunded
+            - fulfilled
+        transitions:
+            pay:
+                from: [created]
+                to: active
+            expire:
+                from: [active]
+                to: expired
+            refund:
+                from: [expired]
+                to: refunded
+            renew:
+                from: [expired]
+                to: active
+            fullfill:
+                from: [active, expired]
+                to: fulfilled
+#        callbacks:
+#            # will be called when testing a transition
+#            guard:
+#                guard_on_submitting:
+#                    on:   'submit_changes'                        # call the callback on a specific transition
+#                    do:   ['@my.awesome.service', 'isSubmittable']  # will call the method of this Symfony service
+#                    args: ['object']                              # arguments for the callback
+#            # will be called before applying a transition
+#            before:
+#                update_reviewer:
+#                    on:   'create'
+#                    do:   ['@my.awesome.service', 'update']
+#                    args: ['object']
+#            # will be called after applying a transition
+#            after:
+#                email_on_publish:
+#                    on:   'publish'
+#                    do:   ['@my.awesome.service', 'sendEmail']
+#                    args: ['object', '"Email title"']

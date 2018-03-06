@@ -8,7 +8,9 @@ use App\Entity\Job;
 use App\Repository\CompanyRepository;
 use App\Repository\JobRepository;
 use App\Util\JobExpirationCalculator;
+use App\Util\StateMachine\JobTransitions;
 use League\Tactician\CommandBus;
+use SM\Factory\FactoryInterface;
 use Vich\UploaderBundle\Handler\UploadHandler;
 
 class CreateJobHandler
@@ -38,20 +40,32 @@ class CreateJobHandler
      */
     private $expirationCalculator;
 
+    /**
+     * @var FactoryInterface
+     */
+    private $stateMachineFactory;
+
     public function __construct(
         JobRepository $jobRepository,
         CompanyRepository $companyRepository,
         CommandBus $bus,
         UploadHandler $uploadHandler,
-        JobExpirationCalculator $expirationCalculator
+        JobExpirationCalculator $expirationCalculator,
+        FactoryInterface $stateMachineFactory
     ) {
         $this->jobRepository = $jobRepository;
         $this->companyRepository = $companyRepository;
         $this->bus = $bus;
         $this->uploadHandler = $uploadHandler;
         $this->expirationCalculator = $expirationCalculator;
+        $this->stateMachineFactory = $stateMachineFactory;
     }
 
+    /**
+     * @param CreateJobCommand $createJobCommand
+     * @return Job
+     * @throws \SM\SMException
+     */
     public function handle(CreateJobCommand $createJobCommand)
     {
         $job = new Job();
@@ -61,9 +75,12 @@ class CreateJobHandler
         $job->setLocation($createJobCommand->location);
         $job->setRemote($createJobCommand->remote);
         $job->setWebsite($createJobCommand->website);
-        $job->setActive(true);
         $job->setExpirationDate($this->expirationCalculator->getExpirationDate());
 
+        //TODO job needs to be paid in future!
+        $jobStateMachine = $this->stateMachineFactory->get($job, JobTransitions::GRAPH);
+        $jobStateMachine->apply(JobTransitions::TRANSITION_PAY);
+        
         $company = null;
         if ($id = $createJobCommand->companyId) {
             /** @var Company $company */
