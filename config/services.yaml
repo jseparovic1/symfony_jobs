@@ -22,6 +22,7 @@ services:
           Vich\UploaderBundle\Handler\UploadHandler: '@vich_uploader.upload_handler'
 
     Vich\UploaderBundle\Naming\UniqidNamer: '@vich_uploader.namer_uniqid'
+    SM\Factory\FactoryInterface: '@sm.factory'
 
     App\:
         resource: '../src/*'

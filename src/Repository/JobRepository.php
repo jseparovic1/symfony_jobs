@@ -29,6 +29,7 @@ class JobRepository extends BaseRepository
     {
         $queryBuilder = $this->createQueryBuilder('job')
             ->andWhere('job.location LIKE :search OR job.title LIKE :search')
+            ->andWhere('job.active = true')
             ->addOrderBy('job.createdAt', 'DESC')
             ->setParameter('search', '%'.$search.'%')
             ->orderBy('job.createdAt');

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Util\StateMachine\JobStates;
 use Gedmo\Timestampable\Traits\Timestampable;
 
 class Job implements ResourceInterface
@@ -28,6 +29,15 @@ class Job implements ResourceInterface
 
     /** @var string */
     private $slug;
+
+    /** @var \DateTime */
+    private $expirationDate;
+
+    /** @var bool */
+    private $renewed = false;
+
+    /** @var string */
+    private $status = JobStates::STATE_CREATED;
 
     /** @var Company */
     private $company;
@@ -150,5 +160,53 @@ class Job implements ResourceInterface
     public function setCompany(?Company $company): void
     {
         $this->company = $company;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getExpirationDate(): \DateTime
+    {
+        return $this->expirationDate;
+    }
+
+    /**
+     * @param \DateTime $expirationDate
+     */
+    public function setExpirationDate(\DateTime $expirationDate): void
+    {
+        $this->expirationDate = $expirationDate;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRenewed(): bool
+    {
+        return $this->renewed;
+    }
+
+    /**
+     * @param bool $renewed
+     */
+    public function setRenewed(bool $renewed): void
+    {
+        $this->renewed = $renewed;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus(string $status): void
+    {
+        $this->status = $status;
     }
 }
