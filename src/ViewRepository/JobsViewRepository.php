@@ -40,6 +40,8 @@ class JobsViewRepository
 
     /**
      * @param $request
+     * @param $search
+     * @param $remote
      * @return PageView
      * @throws \Doctrine\ORM\Query\QueryException
      */

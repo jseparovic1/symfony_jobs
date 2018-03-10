@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Job;
+use App\Util\StateMachine\JobStates;
 use Doctrine\Common\Collections\Criteria;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -18,7 +19,6 @@ class JobRepository extends BaseRepository
         parent::__construct($registry, Job::class);
     }
 
-
     /**
      * @param $search
      * @param null $remote
@@ -29,9 +29,10 @@ class JobRepository extends BaseRepository
     {
         $queryBuilder = $this->createQueryBuilder('job')
             ->andWhere('job.location LIKE :search OR job.title LIKE :search')
-            ->andWhere('job.active = true')
+            ->andWhere('job.status =:status')
             ->addOrderBy('job.createdAt', 'DESC')
             ->setParameter('search', '%'.$search.'%')
+            ->setParameter('status', JobStates::STATE_ACTIVE)
             ->orderBy('job.createdAt');
 
         if ($remote === 'true') {

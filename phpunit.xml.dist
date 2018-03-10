@@ -5,20 +5,29 @@
          xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/6.1/phpunit.xsd"
          backupGlobals="false"
          colors="true"
-         bootstrap="vendor/autoload.php"
+         bootstrap="tests/bootstrap.php"
 >
     <php>
         <ini name="error_reporting" value="-1" />
+        <ini name="memory_limit" value="-1" />
+        <!--<env name="KERNEL_CLASS" value="App\Tests\App\TestKernel" />-->
         <env name="KERNEL_CLASS" value="App\Kernel" />
         <env name="APP_ENV" value="test" />
         <env name="APP_DEBUG" value="1" />
         <env name="APP_SECRET" value="s$cretf0rt3st" />
         <env name="SHELL_VERBOSITY" value="-1" />
-        <!-- define your env variables for the test env here -->
+        <env name="JWT_PRIVATE_KEY_PATH" value="config/jwt/private.pem" />
+        <env name="JWT_PUBLIC_KEY_PATH" value="config/jwt/public.pem" />
+        <env name="JWT_PASSPHRASE" value="jure" />
+        <env name="SHELL_VERBOSITY" value="-1" />
+        <server name="OPEN_ERROR_IN_BROWSER" value="true" />
+        <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true" />
+        <!--<env name="DATABASE_URL" value="sqlite:///var/data/test.sqlite" />-->
+        <env name="DATABASE_URL" value="mysql://homestead:secret@127.0.0.1:3306/symfonyjobs_test" />
     </php>
 
     <testsuites>
-        <testsuite name="Project Test Suite">
+        <testsuite name="Symfonyjobs test suite">
             <directory>tests/</directory>
         </testsuite>
     </testsuites>
@@ -30,6 +39,6 @@
     </filter>
 
     <listeners>
-        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
+        <listener class="\DAMA\DoctrineTestBundle\PHPUnit\PHPUnitListener" />
     </listeners>
 </phpunit>

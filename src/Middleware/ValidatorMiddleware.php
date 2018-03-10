@@ -66,7 +66,7 @@ class ValidatorMiddleware implements Middleware
         }
 
         if (count($constraintViolations) > 0) {
-            throw new CommandValidationException($constraintViolations);
+            throw new CommandValidationException($constraintViolations, Response::HTTP_BAD_REQUEST);
         }
 
         return $next($command);

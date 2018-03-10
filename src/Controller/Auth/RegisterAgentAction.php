@@ -13,6 +13,6 @@ class RegisterAgentAction extends BaseAction
     {
         $this->bus->handle(new RegisterAgentCommand($request));
 
-        return $this->createView([], Response::HTTP_CREATED);
+        return $this->createView(null, Response::HTTP_CREATED);
     }
 }
