@@ -1,7 +1,0 @@
-parameters:
-    role_agent: "ROLE_AGENT"
-
-App\Entity\Company:
-  facebbok:
-      name: "Facebbok"
-      logo: "logos/facebook.jpeg"

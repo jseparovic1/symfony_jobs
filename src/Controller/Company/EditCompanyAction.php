@@ -76,6 +76,4 @@ class EditCompanyAction extends BaseAction
             throw new UnauthorizedHttpException('', "You don't own this resource!");
         }
     }
-
-
 }

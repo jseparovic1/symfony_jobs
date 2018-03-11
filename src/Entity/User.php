@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Gedmo\Timestampable\Traits\Timestampable;
@@ -18,6 +19,12 @@ class User extends BaseUser implements ResourceInterface
 
     /** @var string */
     private $name;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->companies = new ArrayCollection();
+    }
 
     /**
      * @return mixed
