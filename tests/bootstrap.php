@@ -21,11 +21,22 @@ AnnotationRegistry::registerLoader(function ($class) use ($autoload) {
 $application = new Application(new Kernel('test', true));
 $application->setAutoExit(false);
 
-// Create database
-$input = new ArrayInput(['command' => 'doctrine:database:create']);
+// Drop database
+$input = new ArrayInput([
+    'command' => 'doctrine:database:drop'
+]);
 $application->run($input, new ConsoleOutput());
+
+// Create database
+$input = new ArrayInput([
+    'command' => 'doctrine:database:create'
+]);
+$application->run($input, new ConsoleOutput());
+
 // Create database schema
-$input = new ArrayInput(['command' => 'doctrine:schema:create']);
+$input = new ArrayInput([
+    'command' => 'doctrine:schema:create'
+]);
 $application->run($input, new ConsoleOutput());
 
 // Load fixtures of the AppTestBundle

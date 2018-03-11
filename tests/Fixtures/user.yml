@@ -3,11 +3,22 @@ parameters:
 
 App\Entity\User:
   bog_igre:
-      name: "Bog  Igre"
+      name: "Bog Igre"
       roles: "[ROLE_AGENT]"
-      username:
-      usernameCanonical:
+      username: "bog@igra.com"
+      usernameCanonical: "bog@igra.com"
       email: "bog@igra.com"
       emailCanonical: "bog@igra.com"
       enabled: 1
       plainPassword: "bogigre"
+
+  not_active_bog_igre:
+      name: "Elon Musk"
+      roles: "[ROLE_AGENT]"
+      username: 'elon.musk@tesla.com'
+      usernameCanonical: 'elon.musk@tesla.com'
+      email: 'elon.musk@tesla.com'
+      emailCanonical: 'elon.musk@tesla.com'
+      enabled: 0
+      plainPassword: 'theboringpassword'
+      confirmationToken: 'bogConfirmacije'

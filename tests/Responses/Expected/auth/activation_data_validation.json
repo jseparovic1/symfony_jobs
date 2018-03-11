@@ -1,0 +1,12 @@
+{
+    "code": 400,
+    "message": "Validation failed",
+    "errors": {
+        "userId": [
+            "@string@"
+        ],
+        "confirmationToken": [
+            "@string@"
+        ]
+    }
+}
