@@ -56,4 +56,16 @@ class Kernel extends BaseKernel
         $routes->import($confDir.'/{routes}/'.$this->environment.'/**/*'.self::CONFIG_EXTS, '/', 'glob');
         $routes->import($confDir.'/{routes}'.self::CONFIG_EXTS, '/', 'glob');
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getContainerBaseClass()
+    {
+        if ($this->getEnvironment() === 'test') {
+            return '\PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer';
+        }
+
+        return parent::getContainerBaseClass();
+    }
 }

@@ -8,6 +8,7 @@
 /config/jwt/*
 /public/logos/*
 !/public/logos/.gitkeep
+/tests/app/cache/*
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###

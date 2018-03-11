@@ -1,0 +1,13 @@
+parameters:
+    role_agent: "ROLE_AGENT"
+
+App\Entity\User:
+  bog_igre:
+      name: "Bog  Igre"
+      roles: "[ROLE_AGENT]"
+      username:
+      usernameCanonical:
+      email: "bog@igra.com"
+      emailCanonical: "bog@igra.com"
+      enabled: 1
+      plainPassword: "bogigre"
