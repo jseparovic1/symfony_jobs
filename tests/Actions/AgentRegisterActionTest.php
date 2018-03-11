@@ -5,7 +5,7 @@ namespace App\Tests\Actions;
 use App\Util\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-class RegisterAgentActionTest extends JsonApiTestCase
+class AgentRegisterActionTest extends JsonApiTestCase
 {
     /**
      * @test

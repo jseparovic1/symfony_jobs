@@ -7,7 +7,7 @@ use App\Repository\CompanyRepository;
 use App\Util\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-class CreateCompanyTest extends JsonApiTestCase
+class CompanyCreateActionTest extends JsonApiTestCase
 {
     /**
      * @test

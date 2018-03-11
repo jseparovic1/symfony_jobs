@@ -28,10 +28,19 @@ App\Entity\Job:
       description: "Develop space rocket at boring company"
       website: "https://www.boringcompany.com/"
       location: "logos/boringCompany.jpeg"
-      remote: true
+      remote: false
       title: "Senior symfony developer at boring company"
       expirationDate: '<dateTimeBetween("now", "+60 days")>'
       status: active
+      company: "@tesla"
+  job_at_tesla_waiter:
+      description: "Clean after developer at boring company"
+      website: "https://www.boringcompany.com/"
+      location: "logos/boringCompany.jpeg"
+      remote: false
+      title: "Senior waiter at boring company"
+      expirationDate: '<dateTimeBetween("-5 days", "now")>'
+      status: 'expired'
       company: "@tesla"
 
 App\Entity\User:

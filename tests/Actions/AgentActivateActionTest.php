@@ -7,7 +7,7 @@ use App\Repository\UserRepository;
 use App\Util\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-class ActivateAgentActionTest extends JsonApiTestCase
+class AgentActivateActionTest extends JsonApiTestCase
 {
     /**
      * @test
