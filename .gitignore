@@ -6,6 +6,8 @@
 /vendor/
 /.idea
 /config/jwt/*
+!/config/jwt/test
+!/config/jwt/.gitkeep
 /public/logos/*
 !/public/logos/.gitkeep
 /tests/app/cache/*

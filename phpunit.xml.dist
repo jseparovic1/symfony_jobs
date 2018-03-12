@@ -15,9 +15,9 @@
         <env name="APP_DEBUG" value="1" />
         <env name="APP_SECRET" value="s$cretf0rt3st" />
         <env name="SHELL_VERBOSITY" value="-1" />
-        <env name="JWT_PRIVATE_KEY_PATH" value="config/jwt/private.pem" />
-        <env name="JWT_PUBLIC_KEY_PATH" value="config/jwt/public.pem" />
-        <env name="JWT_PASSPHRASE" value="jure" />
+        <env name="JWT_PRIVATE_KEY_PATH" value="config/jwt/test/private.pem" />
+        <env name="JWT_PUBLIC_KEY_PATH" value="config/jwt/test/public.pem" />
+        <env name="JWT_PASSPHRASE" value="symfonyjobs" />
         <env name="SHELL_VERBOSITY" value="-1" />
         <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true" />
         <server name="FIXTURES_DIR" value="../tests/Fixtures" />
