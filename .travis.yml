@@ -25,5 +25,4 @@ script:
   - ./vendor/bin/phpunit
   - ./bin/console lint:yaml config
   - ./bin/console lint:twig templates
-  - composer validate --strict
   - ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
