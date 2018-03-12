@@ -22,8 +22,7 @@
         <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true" />
         <server name="FIXTURES_DIR" value="../tests/Fixtures" />
         <env name="DATABASE_URL" value="sqlite:///var/cache/test/test.sqlite" />
-        <!--<server name="DATABASE_URL" value="sqlite:///var/cache/test/test.sqlite" />-->
-        <env name="DATABASE_URL" value="mysql://homestead:secret@127.0.0.1:3306/symfonyjobs_test" />
+        <server name="DATABASE_URL" value="sqlite:///var/cache/test/test.sqlite" />
     </php>
 
     <testsuites>
