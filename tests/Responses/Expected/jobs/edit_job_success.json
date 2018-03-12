@@ -1,0 +1,20 @@
+{
+    "id": "1",
+    "description": "Description",
+    "website": "Website",
+    "location": "location",
+    "remote": false,
+    "title": "title",
+    "slug": "symfony-developer",
+    "createdAt": "@string@isDateTime()",
+    "expiresAt": "@string@.isDateTime()",
+    "status": "@string@",
+    "renewed": "@boolean@",
+    "company": {
+        "id": "@string@",
+        "name": "@string@",
+        "logo": "@string@",
+        "slogan": "@string@"
+    },
+    "expiredDateForHumans": "@string@"
+}

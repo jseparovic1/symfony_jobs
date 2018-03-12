@@ -1,0 +1,18 @@
+{
+    "code": 400,
+    "message": "Validation failed",
+    "errors": {
+        "description": [
+            "@string@"
+        ],
+        "website": [
+            "@string@"
+        ],
+        "location": [
+            "@string@"
+        ],
+        "title": [
+            "@string@"
+        ]
+    }
+}

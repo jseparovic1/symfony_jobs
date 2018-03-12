@@ -54,4 +54,21 @@ class JobRepository extends BaseRepository
 
         return $queryBuilder->getQuery()->getResult();
     }
+
+    /**
+     * @param string $email
+     * @return Job[]|null
+     */
+    public function findByUserEmail(string $email)
+    {
+        $queryBuilder = $this->createQueryBuilder('job')
+            ->innerJoin('job.company', 'company')
+            ->innerJoin('company.agent', 'agent')
+            ->andWhere('agent.email = :email')
+            ->orderBy('job.createdAt')
+            ->setParameter('email', $email)
+        ;
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 }

@@ -21,7 +21,7 @@ class JsonApiTestCase extends BaseJsonApiTestCase
             '_password' => $password
         ];
 
-        $this->sendJsonRequest('POST', '/api/login', json_encode($data));
+        $this->sendJsonRequest('POST', '/api/login_check', json_encode($data));
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
 
         $response = json_decode($this->client->getResponse()->getContent(), true);

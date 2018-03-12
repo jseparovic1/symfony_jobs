@@ -7,6 +7,7 @@
     <class name="App\Command\ActivateUserCommand">
         <property name="userId">
             <constraint name="NotBlank" />
+            <constraint name="Uuid" />
         </property>
         <property name="confirmationToken">
             <constraint name="NotBlank" />

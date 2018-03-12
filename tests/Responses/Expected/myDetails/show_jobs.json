@@ -1,0 +1,22 @@
+[
+    {
+        "id": "@string@",
+        "description": "@string@",
+        "website": "@string@",
+        "location": "@string@",
+        "remote": "@boolean@",
+        "title": "@string@",
+        "slug": "@string@",
+        "createdAt": "@string@.isDateTime()",
+        "expiresAt": "@string@isDateTime()",
+        "status": "@string@",
+        "renewed": "@boolean@",
+        "company": {
+            "id": "@string@",
+            "name": "@string@",
+            "logo": "@string@",
+            "slogan": "@string@"
+        },
+        "expiredDateForHumans": "@string@"
+    }
+]
