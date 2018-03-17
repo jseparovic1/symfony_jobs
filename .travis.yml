@@ -32,6 +32,7 @@ deploy:
 #    - provider: script
     script: bash ./vendor/bin/dep deploy
 
-#branches:
-#  only:
+branches:
+  only:
+   - dep_travis
 #  - development
