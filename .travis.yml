@@ -30,9 +30,9 @@ script:
 deploy:
     skip_cleanup: true
 #    - provider: script
-    script: ./vendor/bin/dep deploy
-    on:
-        branch: development
+    script: bash ./vendor/bin/dep deploy
+#    on:
+#        branch: development
 
 branches:
   only:
