@@ -14,11 +14,11 @@ matrix:
   include:
     - php: 7.2
 
-before_install:
-  - composer self-update
-
-install:
-  - composer install
+#before_install:
+#  - composer self-update
+#
+#install:
+#  - composer install
 
 #test_script:
 #  - echo "memory_limit=4G" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
@@ -37,6 +37,8 @@ jobs:
     include:
     - php: 7.2
     - script:
+        - composer self-update
+        - composer install
         - echo "memory_limit=4G" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
         - ./vendor/bin/phpunit
         - ./bin/console lint:yaml config
