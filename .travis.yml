@@ -29,7 +29,7 @@ script:
 
 deploy:
     skip_cleanup: true
-#    - provider: script
+    - provider: script
     script: bash ./vendor/bin/dep deploy
     on:
         branch: dep_travis
