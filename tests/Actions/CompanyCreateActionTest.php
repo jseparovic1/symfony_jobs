@@ -4,7 +4,7 @@ namespace App\Tests\Actions;
 
 use App\Entity\Company;
 use App\Repository\CompanyRepository;
-use App\Util\JsonApiTestCase;
+use App\Tests\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 class CompanyCreateActionTest extends JsonApiTestCase

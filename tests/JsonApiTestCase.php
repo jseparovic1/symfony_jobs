@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Util;
+namespace App\Tests;
 
 use Lakion\ApiTestCase\JsonApiTestCase as BaseJsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;

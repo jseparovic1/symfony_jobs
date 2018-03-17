@@ -2,7 +2,7 @@
 
 namespace App\Tests\Actions;
 
-use App\Util\JsonApiTestCase;
+use App\Tests\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 class AgentShowDetailsTest extends JsonApiTestCase
