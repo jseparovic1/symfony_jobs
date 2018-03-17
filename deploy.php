@@ -39,6 +39,10 @@ set('bin/console', function () {
     return parse('{{bin/php}} {{release_path}}/bin/console --no-interaction');
 });
 
+set('release_name', function () {
+    return date('YmdHis');
+});
+
 host('api.symfonyjobs.io')
     ->stage('dev')
     ->port(22)

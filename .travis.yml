@@ -28,6 +28,6 @@ script:
   - ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
 
 after_success:
-    script: vendor/bin/dep deploy
+    script: bash vendor/bin/dep deploy
     on:
         branch: development
