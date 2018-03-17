@@ -20,21 +20,20 @@
 #install:
 #  - composer install
 
-script:
-  - echo "memory_limit=4G" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-  - ./vendor/bin/phpunit
-  - ./bin/console lint:yaml config
-  - ./bin/console lint:twig templates
-  - ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
-
-deploy:
-    skip_cleanup: true
-    script: ./vendor/bin/dep deploy
-    on:
-        branch: development
+#script:
+#  - echo "memory_limit=4G" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+#  - ./vendor/bin/phpunit
+#  - ./bin/console lint:yaml config
+#  - ./bin/console lint:twig templates
+#  - ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
+#
+#deploy:
+#    skip_cleanup: true
+#    script: ./vendor/bin/dep deploy
+#    on:
+#        branch: development
 
 jobs:
-    include:
     language: php
     sudo: false
     cache:
