@@ -27,9 +27,7 @@ script:
   - ./bin/console lint:twig templates
   - ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
 
-deploy:
-  skip_cleanup: true
-  - provider : script
-      script: vendor/bin/dep deploy
-      on:
-          branch: development
+after_success:
+    script: vendor/bin/dep deploy
+    on:
+        branch: development
