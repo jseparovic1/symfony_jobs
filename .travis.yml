@@ -1,56 +1,46 @@
 language: php
 sudo: false
 
-#cache:
-#  directories:
-#    - $HOME/.composer/cache/files
-#
-#env:
-#  global:
-#    - SYMFONY_PHPUNIT_VERSION="7.0.2"
+cache:
+  directories:
+    - $HOME/.composer/cache/files
 
-#matrix:
-#  fast_finish: true
-#  include:
-#    - php: 7.2
+env:
+  global:
+    - SYMFONY_PHPUNIT_VERSION="7.0.2"
 
-#before_install:
-#  - composer self-update
-#
-#install:
-#  - composer install
-
-#test_script:
-#  - echo "memory_limit=4G" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-#  - ./vendor/bin/phpunit
-#  - ./bin/console lint:yaml config
-#  - ./bin/console lint:twig templates
-#  - ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
-#
-#deploy:
-#    skip_cleanup: true
-#    script: ./vendor/bin/dep deploy
-#    on:
-#        branch: development
-
-jobs:
-    include:
-    fast_finish: true
-    env:
-        global:
-            - SYMFONY_PHPUNIT_VERSION="7.0.2"
-        cache:
-            directories:
-                - $HOME/.composer/cache/files
+matrix:
+  fast_finish: true
+  include:
     - php: 7.2
-    - script:
-        - composer self-update
-        - composer install
-        - echo "memory_limit=4G" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-        - ./vendor/bin/phpunit
-        - ./bin/console lint:yaml config
-        - ./bin/console lint:twig templates
-        - ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
-    - stage: deploy
-      script: ./vendor/bin/dep deploy
-      if: branch = development
+
+before_install:
+  - composer self-update
+
+install:
+  - composer install
+
+script:
+  - echo "memory_limit=4G" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+  - ./vendor/bin/phpunit
+  - ./bin/console lint:yaml config
+  - ./bin/console lint:twig templates
+  - ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
+
+deploy:
+    skip_cleanup: true
+    script: ./vendor/bin/dep deploy
+    on:
+        branch: development
+
+#jobs:
+#    include:
+#    - script:
+#        - echo "memory_limit=4G" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+#        - ./vendor/bin/phpunit
+#        - ./bin/console lint:yaml config
+#        - ./bin/console lint:twig templates
+#        - ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
+#    - stage: deploy
+#      script: ./vendor/bin/dep deploy
+#      if: branch = development
