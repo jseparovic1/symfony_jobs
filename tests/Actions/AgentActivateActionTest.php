@@ -4,7 +4,7 @@ namespace App\Tests\Actions;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
-use App\Util\JsonApiTestCase;
+use App\Tests\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 class AgentActivateActionTest extends JsonApiTestCase
