@@ -1,6 +1,6 @@
-#language: php
-#sudo: false
-#
+language: php
+sudo: false
+
 #cache:
 #  directories:
 #    - $HOME/.composer/cache/files
@@ -8,12 +8,12 @@
 #env:
 #  global:
 #    - SYMFONY_PHPUNIT_VERSION="7.0.2"
-#
+
 #matrix:
 #  fast_finish: true
 #  include:
 #    - php: 7.2
-#
+
 #before_install:
 #  - composer self-update
 #
@@ -33,20 +33,15 @@
 #    on:
 #        branch: development
 
+stages:
+  - test
+  - name: deploy
+    if: branch = development
+
 jobs:
-    language: php
-    sudo: false
-    cache:
-      directories:
-        - $HOME/.composer/cache/files
-    env:
-      global:
-        - SYMFONY_PHPUNIT_VERSION="7.0.2"
-    fast_finish: true
     include:
-      - php: 7.2
-    before_install:
-    install:
+        - php: 7.2
+    - stage : test
     - script:
         - composer self-update
         - composer install
