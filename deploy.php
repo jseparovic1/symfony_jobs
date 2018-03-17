@@ -6,10 +6,9 @@ require_once 'recipe/common.php';
 
 set('repository', 'https://github.com/jseparovic1/symfony_jobs.git');
 set('keep_releases', 2);
-set('shared_dirs', ['var/log', 'config/jwt']);
+set('shared_dirs', ['config/jwt']);
 set('shared_files', ['.env']);
 set('writable_dirs', ['var']);
-set('writable_use_sudo', true);
 set('allow_anonymous_stats', false);
 
 //Sudo ?
@@ -44,7 +43,7 @@ host('api.symfonyjobs.io')
     ->stage('dev')
     ->port(22)
     ->user('root')
-    ->set('deploy_path', '/var/www/api.symfonyjobs.com')
+    ->set('deploy_path', '/var/www/api.symfonyjobs.io')
     ->multiplexing(true)
 ;
 
@@ -59,8 +58,9 @@ task('deploy:copy:env', function () {
     run('cp {{release_path}}/.env.dist .env');
 });
 
-task('reload:php-fpm', function () {
+task('reload:services', function () {
     run('sudo /usr/sbin/service php7.2-fpm reload');
+    run('service nginx restart');
 });
 
 task('deploy:cache:clear', function () {
@@ -72,7 +72,7 @@ task('deploy:cache:warmup', function () {
 })->desc('Warm up cache');
 
 task('deploy:own', function () {
-    run('sudo chown -R {{http_user}}:{{http_group}} {{release_path}}');
+    run('sudo chown -R {{http_user}}:{{http_group}} {{deploy_path}}');
 })->desc('Change ownership to www-data');
 
 task('deploy:symlink:env', function () {
@@ -83,6 +83,11 @@ task('database:update', function () {
     run('{{bin/php}} {{bin/console}} do:sc:up {{console_options}} --allow-no-migration');
 })->desc('Migrate database');
 
+task('fix:var:permissions', function () {
+    run('sudo chmod 777 -R {{release_path}}/var/log');
+    run('sudo chmod 777 -R {{release_path}}/var/cache');
+});
+
 task('deploy', [
     'deploy:info',
     'deploy:prepare',
@@ -91,16 +96,17 @@ task('deploy', [
     'deploy:update_code',
     'deploy:copy:env',
     'deploy:shared',
-    'deploy:writable',
     'deploy:vendors',
     'deploy:cache:clear',
     'deploy:cache:warmup',
+    'deploy:writable',
     'deploy:own',
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
 ]);
 
-after('deploy', 'success');
+after('deploy', 'fix:var:permissions');
 after('deploy', 'database:update');
-after('deploy', 'reload:php-fpm');
+after('deploy', 'reload:services');
+after('deploy', 'success');
