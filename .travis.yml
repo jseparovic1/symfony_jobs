@@ -1,18 +1,18 @@
 language: php
 sudo: false
 
-cache:
-  directories:
-    - $HOME/.composer/cache/files
+#cache:
+#  directories:
+#    - $HOME/.composer/cache/files
+#
+#env:
+#  global:
+#    - SYMFONY_PHPUNIT_VERSION="7.0.2"
 
-env:
-  global:
-    - SYMFONY_PHPUNIT_VERSION="7.0.2"
-
-matrix:
-  fast_finish: true
-  include:
-    - php: 7.2
+#matrix:
+#  fast_finish: true
+#  include:
+#    - php: 7.2
 
 #before_install:
 #  - composer self-update
@@ -35,6 +35,13 @@ matrix:
 
 jobs:
     include:
+    fast_finish: true
+    env:
+        global:
+            - SYMFONY_PHPUNIT_VERSION="7.0.2"
+        cache:
+            directories:
+                - $HOME/.composer/cache/files
     - php: 7.2
     - script:
         - composer self-update
