@@ -51,5 +51,4 @@ jobs:
         - ./bin/console lint:twig templates
         - ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
     - stage: deploy
-      script: ./vendor/bin/dep deploy
-      if: branch = development
+    - script: ./vendor/bin/dep deploy
