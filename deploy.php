@@ -21,7 +21,7 @@ set('http_group', 'www-data');
 set('http_user', 'www-data');
 
 set('application', 'api.symfonyjobs');
-set('git_tty', true);
+//set('git_tty', true);
 set('branch', 'deployment');
 set('default_stage', 'dev');
 set('symfony_env', 'prod');
@@ -49,6 +49,12 @@ host('api.symfonyjobs.io')
     ->user('root')
     ->set('deploy_path', '/var/www/api.symfonyjobs.io')
     ->multiplexing(true)
+    ->configFile('~/.ssh/config')
+    ->identityFile('~/.ssh/id_rsa')
+    ->forwardAgent(true)
+    ->multiplexing(true)
+    ->addSshOption('UserKnownHostsFile', '/dev/null')
+    ->addSshOption('StrictHostKeyChecking', 'no')
 ;
 
 //task('deploy:setup:agent', function () {
