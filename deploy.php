@@ -48,8 +48,8 @@ host('api.symfonyjobs.io')
     ->identityFile('~/.ssh/id_rsa')
 //    ->multiplexing(true)
 //    ->configFile('~/.ssh/config')
-//    ->addSshOption('UserKnownHostsFile', '/dev/null')
-//    ->addSshOption('StrictHostKeyChecking', 'no')
+    ->addSshOption('UserKnownHostsFile', '/dev/null')
+    ->addSshOption('StrictHostKeyChecking', 'no')
 ;
 
 //task('deploy:setup:agent', function () {
