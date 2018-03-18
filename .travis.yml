@@ -21,15 +21,20 @@ install:
   - composer install
 
 script:
+  - mkdir -p ~/.ssh
+  - echo $DEPLOY_PRIVATE_KEY > ~/.ssh/id_rsa
+  - echo $DEPLOY_PUBLIC_KEY > ~/.ssh/id_rsa.pub
+  - chmod 700 ~/.ssh
+  - chmod 600 ~/.ssh/id_rsa ~/.ssh/id_rsa.pub
   - echo "memory_limit=4G" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - ./vendor/bin/phpunit
   - ./bin/console lint:yaml config
   - ./bin/console lint:twig templates
 
 after_success:
-  - eval "$(ssh-agent -s)" #start the ssh agent
-  - chmod 600 .travis/deploy_key.pem # this key should have push access
-  - ssh-add .travis/deploy_key.pem
+#  - eval "$(ssh-agent -s)" #start the ssh agent
+#  - chmod 600 .travis/deploy_key.pem # this key should have push access
+#  - ssh-add .travis/deploy_key.pem
 
 deploy:
     skip_cleanup: true
