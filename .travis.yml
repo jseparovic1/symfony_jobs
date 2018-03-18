@@ -31,19 +31,13 @@ script:
   - ./bin/console lint:yaml config
   - ./bin/console lint:twig templates
 
-after_success:
-#  - eval "$(ssh-agent -s)" #start the ssh agent
-#  - chmod 600 .travis/deploy_key.pem # this key should have push access
-#  - ssh-add .travis/deploy_key.pem
-
 deploy:
     skip_cleanup: true
     provider: script
     script: ./vendor/bin/dep deploy -v
     on:
-        branch: dep_travis
+        branch: development
 
 branches:
   only:
-   - dep_travis
-#  - development
+  - development
