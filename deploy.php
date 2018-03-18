@@ -6,7 +6,7 @@ require_once 'recipe/common.php';
 
 set('repository', 'git@github.com:jseparovic1/symfony_jobs.git');
 set('keep_releases', 2);
-set('shared_dirs', ['config/jwt']);
+set('shared_dirs', ['config/jwt', 'public/logos']);
 set('shared_files', ['.env']);
 set('writable_dirs', ['var']);
 set('allow_anonymous_stats', false);
