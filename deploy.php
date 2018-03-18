@@ -50,18 +50,9 @@ host('api.symfonyjobs.io')
     ->set('deploy_path', '/var/www/api.symfonyjobs.io')
     ->forwardAgent(true)
     ->identityFile('~/.ssh/id_rsa')
-//    ->multiplexing(true)
-//    ->configFile('~/.ssh/config')
     ->addSshOption('UserKnownHostsFile', '/dev/null')
     ->addSshOption('StrictHostKeyChecking', 'no')
 ;
-
-//task('deploy:setup:agent', function () {
-//    run('echo "$SSH_PRIVATE_KEY" | ssh-add -');
-//    run('eval $(ssh-agent)');
-//    run('mkdir -p ~/.ssh');
-//    run(' echo -e "StrictHostKeyChecking no" >> ~/.ssh/config');
-//});
 
 task('deploy:copy:env', function () {
     run('cp {{release_path}}/.env.dist .env');
