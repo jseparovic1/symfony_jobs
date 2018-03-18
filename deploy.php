@@ -4,7 +4,7 @@ namespace Deployer;
 
 require_once 'recipe/common.php';
 
-set('repository', 'https://github.com/jseparovic1/symfony_jobs.git');
+set('repository', 'git@github.com:jseparovic1/symfony_jobs.git');
 set('keep_releases', 2);
 set('shared_dirs', ['config/jwt']);
 set('shared_files', ['.env']);
@@ -22,7 +22,7 @@ set('http_user', 'www-data');
 
 set('application', 'api.symfonyjobs');
 //set('git_tty', true);
-set('branch', 'deployment');
+set('branch', 'development');
 set('default_stage', 'dev');
 set('symfony_env', 'prod');
 
@@ -39,22 +39,17 @@ set('bin/console', function () {
     return parse('{{bin/php}} {{release_path}}/bin/console --no-interaction');
 });
 
-set('release_name', function () {
-    return date('YmdHis');
-});
-
 host('api.symfonyjobs.io')
     ->stage('dev')
     ->port(22)
     ->user('root')
     ->set('deploy_path', '/var/www/api.symfonyjobs.io')
-    ->multiplexing(true)
-    ->configFile('~/.ssh/config')
-    ->identityFile('~/.ssh/id_rsa')
     ->forwardAgent(true)
-    ->multiplexing(true)
-    ->addSshOption('UserKnownHostsFile', '/dev/null')
-    ->addSshOption('StrictHostKeyChecking', 'no')
+    ->identityFile('~/.ssh/id_rsa')
+//    ->multiplexing(true)
+//    ->configFile('~/.ssh/config')
+//    ->addSshOption('UserKnownHostsFile', '/dev/null')
+//    ->addSshOption('StrictHostKeyChecking', 'no')
 ;
 
 //task('deploy:setup:agent', function () {
@@ -120,3 +115,4 @@ after('deploy', 'fix:var:permissions');
 after('deploy', 'database:update');
 after('deploy', 'reload:services');
 after('deploy', 'success');
+after('deploy:failed', 'deploy:unlock');
