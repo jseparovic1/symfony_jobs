@@ -34,7 +34,7 @@ after_success:
 deploy:
     skip_cleanup: true
     provider: script
-    script: ./vendor/bin/dep deploy
+    script: ./vendor/bin/dep deploy -v
     on:
         branch: dep_travis
 
