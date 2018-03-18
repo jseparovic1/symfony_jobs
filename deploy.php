@@ -30,6 +30,10 @@ set('env',[
     'APP_ENV' => get('symfony_env')
 ]);
 
+set('release_name', function () {
+    return date('Y-m-d-His');
+});
+
 set('console_options', function () {
     $options = '--no-interaction --env={{symfony_env}}';
     return get('symfony_env') !== 'prod' ? $options : sprintf('%s --no-debug', $options);
