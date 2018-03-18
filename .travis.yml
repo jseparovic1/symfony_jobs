@@ -21,17 +21,23 @@ install:
   - composer install
 
 script:
+  - mkdir -p ~/.ssh
+  - echo $DEPLOY_PRIVATE_KEY > ~/.ssh/id_rsa
+  - echo $DEPLOY_PUBLIC_KEY > ~/.ssh/id_rsa.pub
+  - chmod 700 ~/.ssh
+  - chmod 600 ~/.ssh/id_rsa ~/.ssh/id_rsa.pub
   - echo "memory_limit=4G" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - ./vendor/bin/phpunit
   - ./bin/console lint:yaml config
   - ./bin/console lint:twig templates
-  - ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
 
 deploy:
     skip_cleanup: true
-#    - provider: script
-    script: bash ./vendor/bin/dep deploy
+    provider: script
+    script: ./vendor/bin/dep deploy -v
+    on:
+        branch: development
 
-#branches:
-#  only:
-#  - development
+branches:
+  only:
+  - development
