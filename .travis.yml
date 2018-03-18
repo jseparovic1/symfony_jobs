@@ -25,7 +25,6 @@ script:
   - ./vendor/bin/phpunit
   - ./bin/console lint:yaml config
   - ./bin/console lint:twig templates
-  - ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
 
 after_success:
   - eval "$(ssh-agent -s)" #start the ssh agent
@@ -35,7 +34,7 @@ after_success:
 deploy:
     skip_cleanup: true
     provider: script
-    script: bash ./vendor/bin/dep deploy
+    script: ./vendor/bin/dep deploy
     on:
         branch: dep_travis
 
