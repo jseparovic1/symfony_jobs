@@ -6,7 +6,7 @@ require_once 'recipe/common.php';
 
 set('repository', 'https://github.com/jseparovic1/symfony_jobs.git');
 set('keep_releases', 2);
-set('shared_dirs', ['config/jwt']);
+set('shared_dirs', ['config/jwt', 'public/logos']);
 set('shared_files', ['.env']);
 set('writable_dirs', ['var']);
 set('allow_anonymous_stats', false);
@@ -50,13 +50,6 @@ host('api.symfonyjobs.io')
     ->set('deploy_path', '/var/www/api.symfonyjobs.io')
     ->multiplexing(true)
 ;
-
-//task('deploy:setup:agent', function () {
-//    run('echo "$SSH_PRIVATE_KEY" | ssh-add -');
-//    run('eval $(ssh-agent)');
-//    run('mkdir -p ~/.ssh');
-//    run(' echo -e "StrictHostKeyChecking no" >> ~/.ssh/config');
-//});
 
 task('deploy:copy:env', function () {
     run('cp {{release_path}}/.env.dist .env');
