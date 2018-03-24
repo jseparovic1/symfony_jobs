@@ -78,6 +78,18 @@ class JobRenewActionTest extends JsonApiTestCase
         $job = $jobRepository->findOneBy(['status' => Job::STATE_ACTIVE]);
 
         $this->client->request('POST', sprintf('/api/job/%s/renew', $job->getId()));
-        $this->assertResponseCode($this->response(), Response::HTTP_BAD_REQUEST);
+        $this->assertResponseCode($this->response(), Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_an_error_if_job_not_found()
+    {
+        $this->loadFixtures('jobs');
+        $this->logUserIn('bog@igra.com', 'bogigre');
+
+        $this->client->request('POST', sprintf('/api/job/%s/renew', 'nope'));
+        $this->assertResponseCode($this->response(), Response::HTTP_NOT_FOUND);
     }
 }

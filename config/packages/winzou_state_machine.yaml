@@ -22,7 +22,7 @@ winzou_state_machine:
             renew:
                 from: [expired]
                 to: active
-            fullfill:
+            fulfill:
                 from: [active, expired]
                 to: fulfilled
         callbacks:

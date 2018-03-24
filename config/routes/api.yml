@@ -61,3 +61,8 @@ action.job_renew:
     path: /job/{jobId}/renew
     methods: [POST]
     controller: App\Controller\Job\RenewAction
+
+action.job_fulfill:
+    path: /job/{jobId}/fulfill
+    methods: [POST]
+    controller: App\Controller\Job\FulfillAction
