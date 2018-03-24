@@ -55,3 +55,9 @@ action.agent_show_companies:
     path: /me/companies
     methods: [GET]
     controller: App\Controller\Agent\ShowAgentCompaniesAction
+
+# Job actions
+action.job_renew:
+    path: /job/{jobId}/renew
+    methods: [POST]
+    controller: App\Controller\Job\RenewAction

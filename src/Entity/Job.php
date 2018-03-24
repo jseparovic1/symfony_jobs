@@ -2,12 +2,17 @@
 
 namespace App\Entity;
 
-use App\Util\StateMachine\JobStates;
 use Gedmo\Timestampable\Traits\Timestampable;
 
 class Job implements ResourceInterface
 {
     use Timestampable;
+
+    const STATE_CREATED = 'created';
+    const STATE_ACTIVE = 'active';
+    const STATE_EXPIRED = 'expired';
+    const STATE_REFUNDED = 'refunded';
+    const STATE_FULFILLED = 'fulfilled';
 
     /** @var mixed */
     private $id;
@@ -37,10 +42,13 @@ class Job implements ResourceInterface
     private $renewed = false;
 
     /** @var string */
-    private $status = JobStates::STATE_CREATED;
+    private $status = self::STATE_CREATED;
 
     /** @var Company */
     private $company;
+
+    /** @var User */
+    private $author;
 
     /**
      * @return mixed
@@ -208,5 +216,21 @@ class Job implements ResourceInterface
     public function setStatus(string $status): void
     {
         $this->status = $status;
+    }
+
+    /**
+     * @return User|null
+     */
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param User $author
+     */
+    public function setAuthor(User $author): void
+    {
+        $this->author = $author;
     }
 }

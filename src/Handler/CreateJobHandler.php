@@ -75,6 +75,7 @@ class CreateJobHandler
         $job->setLocation($createJobCommand->location);
         $job->setRemote($createJobCommand->remote);
         $job->setWebsite($createJobCommand->website);
+        $job->setAuthor($createJobCommand->user);
         $job->setExpirationDate($this->expirationCalculator->getExpirationDate());
 
         //TODO job needs to be paid in future!

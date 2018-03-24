@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Job;
-use App\Util\StateMachine\JobStates;
 use Doctrine\Common\Collections\Criteria;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -32,7 +31,7 @@ class JobRepository extends BaseRepository
             ->andWhere('job.status =:status')
             ->addOrderBy('job.createdAt', 'DESC')
             ->setParameter('search', '%'.$search.'%')
-            ->setParameter('status', JobStates::STATE_ACTIVE)
+            ->setParameter('status', Job::STATE_ACTIVE)
             ->orderBy('job.createdAt');
 
         if ($remote === 'true') {

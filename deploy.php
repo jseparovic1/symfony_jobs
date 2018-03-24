@@ -3,6 +3,10 @@
 namespace Deployer;
 
 require_once 'recipe/common.php';
+require 'recipe/slack.php';
+
+set('slack_webhook', 'https://hooks.slack.com/services/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');
+set('slack_color', '#42f448');
 
 set('repository', 'git@github.com:jseparovic1/symfony_jobs.git');
 set('keep_releases', 2);
@@ -11,9 +15,6 @@ set('shared_files', ['.env']);
 set('writable_dirs', ['var']);
 set('allow_anonymous_stats', false);
 
-//Sudo ?
-//set('cleanup_use_sudo', true);
-//set('writable_use_sudo', true);
 
 //Premisions
 set('writable_mode', 'chown');
@@ -111,3 +112,5 @@ after('deploy', 'database:update');
 after('deploy', 'reload:services');
 after('deploy', 'success');
 after('deploy:failed', 'deploy:unlock');
+after('success', 'slack:notify:success');
+after('deploy:failed', 'slack:notify:failure');
