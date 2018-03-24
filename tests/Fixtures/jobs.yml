@@ -1,0 +1,26 @@
+include:
+    - company.yml
+
+App\Entity\Job:
+  job (template):
+      description: '<randomHtml(2,3)>'
+      website: '<url()>'
+      location: "logos/bojo.jpeg"
+      remote: '<boolean(50)>'
+      title: '<sentence()>'
+      expirationDate: '<dateTimeBetween("now", "+20 days")>'
+      company: "@facebook"
+
+  job{1..10} (extends job):
+      status: active
+
+# Renew job tests
+  job_expired_for_test (extends job):
+      title: I am expired job post
+      renewed: false
+      status: expired
+
+  job_expired_and_renewd (extends job):
+      title: I am expired renewed job post
+      renewed: true
+      status: expired

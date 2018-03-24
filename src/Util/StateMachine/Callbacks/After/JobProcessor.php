@@ -8,26 +8,18 @@ use App\Util\JobExpirationCalculator;
 
 class JobProcessor
 {
-    /**
-     * @var JobExpirationCalculator
-     */
-    private $expirationCalculator;
-
-    /**
-     * @var JobRepository
-     */
-    private $jobRepository;
-
-    public function __construct(JobExpirationCalculator $expirationCalculator, JobRepository $jobRepository)
-    {
-        $this->expirationCalculator = $expirationCalculator;
-        $this->jobRepository = $jobRepository;
-    }
-
-    public function process(Job $job)
+    public static function process(Job $job)
     {
         $job->setExpirationDate(JobExpirationCalculator::getRenewExpirationDate());
         $job->setRenewed(true);
-        $this->jobRepository->save($job);
+    }
+
+    /**
+     * @param Job $job
+     * @return bool
+     */
+    public static function renewEligibilityChecker(Job $job)
+    {
+        return !$job->isRenewed();
     }
 }

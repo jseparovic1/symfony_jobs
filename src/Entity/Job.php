@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Util\StateMachine\JobStates;
 use Gedmo\Timestampable\Traits\Timestampable;
 
 class Job implements ResourceInterface

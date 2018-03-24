@@ -31,7 +31,9 @@ class RenewAction extends BaseAction
      */
     private $tokenStorage;
 
-    /** @var StateMachineFactory */
+    /**
+     * @var StateMachineFactory
+     */
     private $stateMachineFactory;
 
     /**
@@ -64,10 +66,11 @@ class RenewAction extends BaseAction
 
         $jobStateMachine = $this->stateMachineFactory->get($job, JobTransitions::GRAPH);
         if (!$jobStateMachine->can(JobTransitions::TRANSITION_RENEW)) {
-            throw new BadRequestHttpException("Job can't be renewed because it didn't expired yet. Be patient.");
+            throw new BadRequestHttpException("Job can't be renewed.");
         }
         $jobStateMachine->apply(JobTransitions::TRANSITION_RENEW);
-        
+        $this->jobRepository->save($job);
+
         return $this->createView(null, Response::HTTP_NO_CONTENT);
     }
 }

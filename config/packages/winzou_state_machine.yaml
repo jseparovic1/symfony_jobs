@@ -26,19 +26,11 @@ winzou_state_machine:
                 from: [active, expired]
                 to: fulfilled
         callbacks:
-#            # will be called when testing a transition
-#            guard:
-#                guard_on_submitting:
-#                    on:   'submit_changes'                        # call the callback on a specific transition
-#                    do:   ['@my.awesome.service', 'isSubmittable']  # will call the method of this Symfony service
-#                    args: ['object']                              # arguments for the callback
-            # will be called before applying a transition
-#            before:
-#                update_reviewer:
-#                    on:   'create'
-#                    do:   ['@my.awesome.service', 'update']
-#                    args: ['object']
-#            will be called after applying a transition
+            guard:
+                guard_on_renewing:
+                    on:   'renew'
+                    do:   ['App\Util\StateMachine\Callbacks\After\JobProcessor', 'renewEligibilityChecker']
+                    args: ['object']
             after:
                 job_renew_handler:
                     on:   'renew'
