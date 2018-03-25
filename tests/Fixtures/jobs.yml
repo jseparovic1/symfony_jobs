@@ -24,3 +24,9 @@ App\Entity\Job:
       title: I am expired renewed job post
       renewed: true
       status: expired
+
+# Jobs that expire command shoud catch
+  job_expired_but_still_active (extends job):
+      title: Isteko sam do dna života
+      status: active
+      expirationDate: '<dateTimeBetween("-2 days", "now")>'
