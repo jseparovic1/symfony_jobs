@@ -29,10 +29,14 @@ winzou_state_machine:
             guard:
                 guard_on_renewing:
                     on:   'renew'
-                    do:   ['App\Util\StateMachine\Callbacks\After\JobProcessor', 'renewEligibilityChecker']
+                    do:   ['@app.job_processor', 'renewEligibilityChecker']
                     args: ['object']
             after:
                 job_renew_handler:
                     on:   'renew'
-                    do:   [App\Util\StateMachine\Callbacks\After\JobProcessor, 'process']
+                    do:   ['@app.job_processor', 'process']
+                    args: ['object']
+                job_expired_send_email:
+                    on:   'expire'
+                    do:   ['@app.job_processor', 'expire']
                     args: ['object']

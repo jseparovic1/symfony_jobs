@@ -1,0 +1,67 @@
+parameters:
+    role_agent: "ROLE_AGENT"
+
+App\Entity\Company:
+  facebook:
+      name: "Facebook"
+      slogan: "Connecting people, just like rakia, but stronger"
+      logo: "logos/facebook.jpeg"
+      agent: "@bog_igre"
+
+  tesla:
+      name: "Tesla"
+      slogan: "Doing amaizing stuff"
+      logo: "logos/tesla.jpeg"
+      agent: "@agent_elon_musk"
+
+App\Entity\Job:
+  job_at_facebook:
+      description: "Do you know how to command the power of web technology through the languages of Javascript, CSS, PHP & MySQL?If so, come work with our team of highly skilled individuals who maintain and operate MVC PHP enterprise applications. We are looking for a faithful soul to join our team and help us shape our codebase into a self-sustaining entity.The ideal candidate must be hands-on, a superb communicator, and have experience working in a fast-paced and collaborative environment. A passion for quality, an eye for detail, and the hunger to bring great design to life are also required."
+      website: "http://www.booj.com/career-portal#web-developer"
+      location: "logos/bojo.jpeg"
+      remote: true
+      title: "Symfony developer"
+      expirationDate: '<dateTimeBetween("now", "+60 days")>'
+      status: active
+      company: "@facebook"
+  job_at_tesla:
+      description: "Develop space rocket at boring company"
+      website: "https://www.boringcompany.com/"
+      location: "logos/boringCompany.jpeg"
+      remote: false
+      title: "Senior symfony developer at boring company"
+      expirationDate: '<dateTimeBetween("now", "+60 days")>'
+      status: active
+      company: "@tesla"
+  job_at_tesla_waiter:
+      description: "Clean after developer at boring company"
+      website: "https://www.boringcompany.com/"
+      location: "logos/boringCompany.jpeg"
+      remote: false
+      title: "Senior waiter at boring company"
+      expirationDate: '<dateTimeBetween("-5 days", "now")>'
+      status: 'expired'
+      company: "@tesla"
+
+App\Entity\User:
+  bog_igre:
+      name: "Bog Igre"
+      roles: "[ROLE_AGENT]"
+      username: "bog@igra.com"
+      usernameCanonical: "bog@igra.com"
+      email: "bog@igra.com"
+      emailCanonical: "bog@igra.com"
+      enabled: 1
+      plainPassword: "bogigre"
+      companies: ["@facebook"]
+
+  agent_elon_musk:
+      name: "Elon Musk"
+      roles: "[ROLE_AGENT]"
+      username: 'elon.musk@tesla.com'
+      usernameCanonical: 'elon.musk@tesla.com'
+      email: 'elon.musk@tesla.com'
+      emailCanonical: 'elon.musk@tesla.com'
+      enabled: 0
+      plainPassword: 'theboringpassword'
+      confirmationToken: 'bogConfirmacije'

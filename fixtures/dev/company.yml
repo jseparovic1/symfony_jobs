@@ -1,0 +1,9 @@
+include:
+    - agent.yml
+
+App\Entity\Company:
+  facebook:
+      name: "Facebook"
+      slogan: "Connecting people, just like rakia, but stronger"
+      logo: "logos/facebook.jpeg"
+      agent: "@bog_igre"

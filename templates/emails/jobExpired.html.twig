@@ -1,0 +1,10 @@
+{%  extends 'base.html.twig' %}
+
+{% block body %}
+    <p>Hi {{ agent.name }} , <br/>
+        Your job for "{{ job.title }}" has been expired.
+        You can renew your job, or request a refund <a href="{{ url('action.agent_show_jobs') }}">here</a></p>
+    <p>Thank you for using our service.<br/>
+        Sincerely, <br/>
+        Symfonyjobs</p>
+{% endblock %}

@@ -19,7 +19,7 @@ class JobExpirationCalculator
     /**
      * @return Carbon
      */
-    public static function getRenewExpirationDate()
+    public function getRenewExpirationDate()
     {
         $now =  Carbon::now();
 
