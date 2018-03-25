@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Job;
+use Carbon\Carbon;
 use Doctrine\Common\Collections\Criteria;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -69,5 +70,20 @@ class JobRepository extends BaseRepository
         ;
 
         return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
+     * @return Job[]|null
+     */
+    public function findAllExpired()
+    {
+        return $this->createQueryBuilder('job')
+            ->andWhere('job.status = :status')
+            ->andWhere('job.expirationDate < :todayDate')
+            ->setParameter('status', Job::STATE_ACTIVE)
+            ->setParameter('todayDate', new \DateTimeImmutable('now'))
+            ->getQuery()
+            ->getResult()
+            ;
     }
 }

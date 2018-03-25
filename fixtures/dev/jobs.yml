@@ -11,8 +11,12 @@ App\Entity\Job:
       expirationDate: '<dateTimeBetween("now", "+20 days")>'
       company: "@facebook"
 
-  job{1..3} (extends job):
+  job{1..100} (extends job):
       status: active
+
+  job_expired{1..30} (extends job):
+      status: active
+      expirationDate: '<dateTimeBetween("-10 days", "now")>'
 
 # Renew job tests
   job_expired_for_test (extends job):

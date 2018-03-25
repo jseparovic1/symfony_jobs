@@ -24,6 +24,10 @@ services:
     Vich\UploaderBundle\Naming\UniqidNamer: '@vich_uploader.namer_uniqid'
     SM\Factory\FactoryInterface: '@sm.factory'
 
+    app.job_processor:
+        alias: App\Util\StateMachine\Callbacks\JobProcessor
+        public: true
+
     App\:
         resource: '../src/*'
         exclude: '../src/{Entity,Migrations,Tests,Kernel.php,Handler}'
@@ -36,6 +40,3 @@ services:
         resource: '../src/Handler'
         tags:
             - {name : 'tactician.handler', typehints: true}
-
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
