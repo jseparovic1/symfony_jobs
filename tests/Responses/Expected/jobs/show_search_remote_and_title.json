@@ -1,0 +1,13 @@
+{
+    "page": 1,
+    "limit": 20,
+    "pages": 1,
+    "total": 1,
+    "links": {
+        "self": "/api/jobs?search=symfony&remote=true&page=1&limit=20",
+        "first": "/api/jobs?search=symfony&remote=true&page=1&limit=20",
+        "last": "/api/jobs?search=symfony&remote=true&page=1&limit=20",
+        "next": "/api/jobs?search=symfony&remote=true&page=1&limit=20"
+    },
+    "items": "@array@"
+}

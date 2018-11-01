@@ -1,0 +1,16 @@
+# Read the documentation: https://symfony.com/doc/master/bundles/FOSRestBundle/index.html
+fos_rest:
+    view:
+        formats:
+            json: true
+        empty_content: 204
+    exception:
+        enabled: true
+        exception_controller: 'fos_rest.exception.controller:showAction'
+        codes:
+            'App\Exception\CommandValidationException': 400
+    serializer: ~
+    format_listener:
+        rules:
+            - { path: '^/api', priorities: ['json'], fallback_format: json, prefer_extension: true }
+            - { path: '^/', stop: true }

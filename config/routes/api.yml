@@ -1,0 +1,68 @@
+index:
+    path: /
+    controller: App\Controller\HomeController::index
+
+#   Auth
+action.auth_register:
+    path: /register
+    methods: [POST]
+    controller: App\Controller\Auth\RegisterAgentAction
+
+action.auth_activate:
+    path: /activate
+    methods: [PUT,POST]
+    controller: App\Controller\Auth\ActivateUserAction
+
+#   Job
+action.job_show_list:
+    path: /jobs
+    methods: [GET]
+    controller: App\Controller\Job\ShowJobsAction
+
+action.job_create:
+    path: /jobs
+    methods: [POST]
+    controller: App\Controller\Job\CreateJobAction
+
+action.job_edit:
+    path: /job/{id}
+    methods: [PUT]
+    controller: App\Controller\Job\EditJobAction
+
+#   Company
+action.create_company:
+    path: /company
+    methods: [POST]
+    controller: App\Controller\Company\CreateCompanyAction
+
+action.company_edit:
+    path: /company/{id}
+    methods: [POST]
+    controller: App\Controller\Company\EditCompanyAction
+
+#   Agent details
+action.agent_show_details:
+    path: /me
+    methods: [GET]
+    controller: App\Controller\Agent\ShowAgentDetailsAction
+
+action.agent_show_jobs:
+    path: /me/jobs
+    methods: [GET]
+    controller: App\Controller\Agent\ShowAgentJobsAction
+
+action.agent_show_companies:
+    path: /me/companies
+    methods: [GET]
+    controller: App\Controller\Agent\ShowAgentCompaniesAction
+
+# Job actions
+action.job_renew:
+    path: /job/{jobId}/renew
+    methods: [POST]
+    controller: App\Controller\Job\RenewAction
+
+action.job_fulfill:
+    path: /job/{jobId}/fulfill
+    methods: [POST]
+    controller: App\Controller\Job\FulfillAction

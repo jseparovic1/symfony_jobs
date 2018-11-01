@@ -4,25 +4,39 @@ parameters:
     locale: 'en'
 
 services:
-    # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-        public: false       # Allows optimizing the container by removing unused services; this also means
-                            # fetching services directly from the container via $container->get() won't work.
-                            # The best practice is to be explicit about your dependencies anyway.
+        public: false
+        bind:
+          $validationErrorViewClass: App\View\ValidationErrorView
+          $kernelRootDir: '%kernel.root_dir%'
+          $debug: true
+          $frontendUrl: 'smfonyjobs.io'
+          $fromEmail: 'no-reply@symfonyjobs.io'
+          League\Tactician\CommandBus: '@tactician.commandbus.default'
+          App\Factory\ValidationErrorViewFactoryInterface:  '@App\Factory\ValidationErrorViewFactory'
+          FOS\RestBundle\Util\ExceptionValueMap: '@fos_rest.exception.codes_map'
+          FOS\UserBundle\Util\CanonicalizerInterface: '@fos_user.util.canonicalizer.default'
+          Vich\UploaderBundle\Templating\Helper\UploaderHelper: '@vich_uploader.templating.helper.uploader_helper'
+          Vich\UploaderBundle\Handler\UploadHandler: '@vich_uploader.upload_handler'
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
+    Vich\UploaderBundle\Naming\UniqidNamer: '@vich_uploader.namer_uniqid'
+    SM\Factory\FactoryInterface: '@sm.factory'
+
+    app.job_processor:
+        alias: App\Util\StateMachine\Callbacks\JobProcessor
+        public: true
+
     App\:
         resource: '../src/*'
-        exclude: '../src/{Entity,Migrations,Tests,Kernel.php}'
+        exclude: '../src/{Entity,Migrations,Tests,Kernel.php,Handler}'
 
-    # controllers are imported separately to make sure services can be injected
-    # as action arguments even if you don't extend any base controller class
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    App\Handler\:
+        resource: '../src/Handler'
+        tags:
+            - {name : 'tactician.handler', typehints: true}

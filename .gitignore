@@ -5,4 +5,15 @@
 /var/
 /vendor/
 /.idea
+/config/jwt/*
+!/config/jwt/test
+!/config/jwt/.gitkeep
+/public/logos/*
+!/public/logos/.gitkeep
+/tests/app/cache/*
 ###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+/phpunit.xml
+###< symfony/phpunit-bridge ###

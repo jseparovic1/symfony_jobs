@@ -1,0 +1,42 @@
+winzou_state_machine:
+    jobs_machine:
+        class: App\Entity\Job
+        property_path: status
+        graph: job
+        states:
+            - created
+            - active
+            - expired
+            - refunded
+            - fulfilled
+        transitions:
+            pay:
+                from: [created]
+                to: active
+            expire:
+                from: [active]
+                to: expired
+            refund:
+                from: [expired]
+                to: refunded
+            renew:
+                from: [expired]
+                to: active
+            fulfill:
+                from: [active, expired]
+                to: fulfilled
+        callbacks:
+            guard:
+                guard_on_renewing:
+                    on:   'renew'
+                    do:   ['@app.job_processor', 'renewEligibilityChecker']
+                    args: ['object']
+            after:
+                job_renew_handler:
+                    on:   'renew'
+                    do:   ['@app.job_processor', 'process']
+                    args: ['object']
+                job_expired_send_email:
+                    on:   'expire'
+                    do:   ['@app.job_processor', 'expire']
+                    args: ['object']

@@ -1,0 +1,43 @@
+language: php
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+env:
+  global:
+    - SYMFONY_PHPUNIT_VERSION="7.0.2"
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.2
+
+before_install:
+  - composer self-update
+
+install:
+  - composer install
+
+script:
+  - mkdir -p ~/.ssh
+  - echo $DEPLOY_PRIVATE_KEY > ~/.ssh/id_rsa
+  - echo $DEPLOY_PUBLIC_KEY > ~/.ssh/id_rsa.pub
+  - chmod 700 ~/.ssh
+  - chmod 600 ~/.ssh/id_rsa ~/.ssh/id_rsa.pub
+  - echo "memory_limit=4G" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+  - ./vendor/bin/phpunit
+  - ./bin/console lint:yaml config
+  - ./bin/console lint:twig templates
+
+deploy:
+    skip_cleanup: true
+    provider: script
+    script: ./vendor/bin/dep deploy -v
+    on:
+        branch: development
+
+branches:
+  only:
+  - development
