@@ -1,0 +1,38 @@
+version: '3.7'
+services:
+    db:
+        image: mysql:5.7
+        ports:
+            - 2306:3306
+        command: --default-authentication-plugin=mysql_native_password
+        volumes:
+          - ./var/data:/var/lib/mysql:rw
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: symfonyjobs
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: admin
+    php:
+        build:
+            context: .
+            dockerfile: ./docker/php/Dockerfile
+        ports:
+            - 80:80
+        depends_on:
+            - db
+        volumes:
+            - .:/app:rw,cached
+            - ./public:/app/public:rw,delegated
+            - ./docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini
+        environment:
+        - APP_ENV=dev
+        - APP_DEBUG=1
+        - APP_SECRET=EDITME
+        - DATABASE_URL=mysql://admin:admin@db/symfonyjobs
+        - MAILER_URL=smtp://mailhog:1025
+    mailhog:
+        image: mailhog/mailhog:latest
+        environment:
+            - MH_STORAGE=maildir
+        ports:
+            - 7025:8025
