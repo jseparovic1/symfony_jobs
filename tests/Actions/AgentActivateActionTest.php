@@ -17,7 +17,7 @@ class AgentActivateActionTest extends JsonApiTestCase
         $this->loadFixtures('user');
 
         /** @var UserRepository $userRepository */
-        $userRepository =$this->getEntityManager()->getRepository(User::class);
+        $userRepository = $this->getEntityManager()->getRepository(User::class);
         $user = $userRepository->findOneByEmail('elon.musk@tesla.com');
 
         $data = [

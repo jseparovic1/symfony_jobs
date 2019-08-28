@@ -2,19 +2,12 @@
 
 namespace App\Tests;
 
-use Lakion\ApiTestCase\JsonApiTestCase as BaseJsonApiTestCase;
+use ApiTestCase\JsonApiTestCase as BaseApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * Class JsonApiTestCase
- */
-class JsonApiTestCase extends BaseJsonApiTestCase
+class JsonApiTestCase extends BaseApiTestCase
 {
-    /**
-     * @param $username
-     * @param null $password
-     */
-    public function logUserIn($username, $password)
+    public function logUserIn(string $username, string $password)
     {
         $data = [
             '_username' => $username,
